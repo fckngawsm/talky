@@ -1,38 +1,21 @@
 {
-  "name": "video",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@radix-ui/react-dialog": "^1.1.11",
-    "@radix-ui/react-dropdown-menu": "^2.1.12",
-    "@radix-ui/themes": "^3.2.1",
-    "effector": "^23.3.0",
-    "effector-react": "^23.3.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-hook-form": "^7.56.2",
-    "styled-components": "^6.1.17",
-    "zod": "^3.24.3"
-  },
+  "workspaces": [
+    "packages/core/*"
+  ],
   "devDependencies": {
-    "@eslint/js": "^9.22.0",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4",
-    "@vitejs/plugin-react": "^4.3.4",
-    "eslint": "^9.22.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^16.0.0",
-    "prettier": "^3.5.3",
-    "typescript": "~5.7.2",
-    "typescript-eslint": "^8.26.1",
-    "vite": "^6.3.1"
-  }
+    "lerna": "^8.2.2"
+  },
+  "scripts": {
+    "bootstrap": "yarn install && yarn init",
+    "init": "node init.js && lerna exec -- yarn install",
+    "reset": "lerna clean -y && rm -rf node_modules && yarn install",
+    "dev:client": "lerna run dev  --scope=frontend"
+  },
+  "name": "video",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/fckngawsm/talky.git",
+  "author": "Kirill",
+  "license": "MIT"
 }
