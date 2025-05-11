@@ -1,5 +1,5 @@
 function App() {
-  return <>Video!</>;
+  return <>talky!</>;
 }
 
 export default App;
