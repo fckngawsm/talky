@@ -1,5 +1,7 @@
+import { RadixWrapper } from "./RadixWrapper";
+
 function App() {
-  return <>talky!</>;
+  return <RadixWrapper>Hello!</RadixWrapper>;
 }
 
 export default App;
