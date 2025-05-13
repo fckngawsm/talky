@@ -1,3 +1,4 @@
+import "../shared/base/normalize.css";
 // Base theme tokens
 import "@radix-ui/themes/tokens/base.css";
 
