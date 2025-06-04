@@ -28,9 +28,6 @@
     "type": "git",
     "url": "git+https://github.com/fckngawsm/talky.git"
   },
-  "scripts": {
-    "test": "node ./__tests__/core.test.js"
-  },
   "bugs": {
     "url": "https://github.com/fckngawsm/talky/issues"
   }
