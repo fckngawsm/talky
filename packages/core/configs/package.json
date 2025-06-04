@@ -1,8 +1,8 @@
 {
   "name": "@talky/core-configs",
   "version": "0.0.0",
-  "description": "> TODO: description",
-  "author": "Kirill <marchenko@finleo.ru>",
+  "description": "config root",
+  "author": "Kirill",
   "homepage": "https://github.com/fckngawsm/talky#readme",
   "license": "ISC",
   "main": "lib/core.js",

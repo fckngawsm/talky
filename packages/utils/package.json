@@ -2,7 +2,7 @@
   "name": "utils",
   "version": "0.0.0",
   "description": "> TODO: description",
-  "author": "Kirill <marchenko@finleo.ru>",
+  "author": "Kirill",
   "homepage": "https://github.com/fckngawsm/talky#readme",
   "license": "ISC",
   "main": "lib/utils.js",
