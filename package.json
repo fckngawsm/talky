@@ -8,10 +8,12 @@
     "lerna": "^8.2.2"
   },
   "scripts": {
-    "bootstrap": "yarn install && yarn init",
+    "bootstrap": "yarn install",
     "init": "node init.ts && lerna exec -- yarn install",
     "reset": "lerna clean -y && rm -rf node_modules && yarn install",
-    "dev:client": "lerna run dev  --scope=frontend"
+    "dev:client": "lerna run dev  --scope=frontend",
+    "dev:api": "lerna run dev  --scope=api",
+    "dev": "lerna run dev"
   },
   "name": "video",
   "version": "1.0.0",

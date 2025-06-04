@@ -3,4 +3,8 @@
 1. Убедитесь что у вас установлен node и docker
 2. Выполните команду yarn bootstrap - это обязательный шаг
 3. Выполните команду yarn dev
-4. Выполните команду dev:client - для запуска frontend
+4. Выполните команду dev:client - для запуска только frontend
+
+# lerna
+
+1. Добавить новый package npx lerna create {package_name}
