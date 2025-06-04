@@ -1,5 +1,5 @@
 {
-  "name": "core",
+  "name": "@talky/core-configs",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Kirill <marchenko@finleo.ru>",
@@ -11,8 +11,19 @@
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "lib",
+    ".eslintrc.js",
+    ".prettierrc"
   ],
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "typescript": "~5.7.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fckngawsm/talky.git"
