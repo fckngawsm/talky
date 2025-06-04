@@ -15,7 +15,7 @@
     "dev:api": "lerna run dev  --scope=api",
     "dev": "lerna run dev"
   },
-  "name": "video",
+  "name": "talky",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/fckngawsm/talky.git",
