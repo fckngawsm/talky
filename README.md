@@ -8,6 +8,9 @@
 # lerna
 
 1. Добавить новый package npx lerna create {package_name}
+2. Чтобы добавить зависимость для определенного package:  yarn lerna add {your_dep} --scope {package_name}
+3. Чтобы добавить зависимость для любого package:  yarn lerna add {your_dep}
+4. Если вы хотите добавить dev зависимость, проделайте то же самое, но с флагом dev yarn lerna add {your_dep} --dev --scope {package_name}
 
 # Что нужно будет сделать
 1. Продумать архитектуру
