@@ -1,10 +1,5 @@
-import { Box, Section } from "@radix-ui/themes";
+import { ChatWidget } from "../../widgets/chat/chat.ui";
 
 export const ChatPage = () => {
-  return (
-    <Section p="0">
-      <Box>321</Box>
-      <Box>123</Box>
-    </Section>
-  );
+  return <ChatWidget />;
 };
