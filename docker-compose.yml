@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: packages/core/api/Dockerfile
     volumes:
-      - ./packages/core/api:/app/src
+      - ./packages/core/api:/app
       - /app/node_modules
     depends_on:
       mysql:
@@ -21,13 +21,13 @@ services:
     networks:
       - my-network
 
-  user-service:
-    container_name: user-service
+  users-service:
+    container_name: users-service
     build:
       context: .
-      dockerfile: packages/core/user-service/Dockerfile
+      dockerfile: packages/core/users-service/Dockerfile
     volumes:
-      - ./packages/core/user-service:/app/src
+      - ./packages/core/users-service:/app
       - /app/node_modules
     depends_on:
       mysql:
@@ -35,9 +35,9 @@ services:
       nats:
         condition: service_started
     env_file:
-      - ./packages/core/user-service/.env
+      - ./packages/core/users-service/.env
     ports:
-      - "3003:3003"
+      - "3002:3002"
     networks:
       - my-network
 
@@ -47,7 +47,7 @@ services:
       context: .
       dockerfile: packages/core/auth-service/Dockerfile
     volumes:
-      - ./packages/core/auth-service:/app/src
+      - ./packages/core/auth-service:/app
       - /app/node_modules
     depends_on:
       mysql:
