@@ -1,0 +1,111 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: packages/core/api/Dockerfile
+    volumes:
+      - ./packages/core/api:/app/src
+      - /app/node_modules
+    depends_on:
+      mysql:
+        condition: service_healthy
+      nats:
+        condition: service_started
+    env_file:
+      - ./packages/core/api/.env
+    ports:
+      - "3002:3002"
+    networks:
+      - my-network
+
+  user-service:
+    container_name: user-service
+    build:
+      context: .
+      dockerfile: packages/core/user-service/Dockerfile
+    volumes:
+      - ./packages/core/user-service:/app/src
+      - /app/node_modules
+    depends_on:
+      mysql:
+        condition: service_healthy
+      nats:
+        condition: service_started
+    env_file:
+      - ./packages/core/user-service/.env
+    ports:
+      - "3003:3003"
+    networks:
+      - my-network
+
+  auth-service:
+    container_name: auth-service
+    build:
+      context: .
+      dockerfile: packages/core/auth-service/Dockerfile
+    volumes:
+      - ./packages/core/auth-service:/app/src
+      - /app/node_modules
+    depends_on:
+      mysql:
+        condition: service_healthy
+      nats:
+        condition: service_started
+    env_file:
+      - ./packages/core/auth-service/.env
+    ports:
+      - "3004:3004"
+    networks:
+      - my-network
+
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    volumes:
+      - mysql_data:/var/lib/mysql
+    env_file:
+      - ./packages/core/dbs/my-sql/.env
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - my-network
+
+  nats:
+    container_name: nats
+    image: nats:latest
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    networks:
+      - my-network
+
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: packages/core/frontend/Dockerfile
+    volumes:
+      - ./packages/core/frontend:/app/packages/core/frontend
+      - ./packages/shared:/app/packages/shared
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./packages/core/frontend/.env
+    depends_on:
+      - api
+    networks:
+      - my-network
+
+networks:
+  my-network:
+
+volumes:
+  mysql_data:

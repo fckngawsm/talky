@@ -1,7 +1,8 @@
 {
   "private": true,
   "workspaces": [
-    "packages/core/*"
+    "packages/core/*",
+    "packages/shared/*"
   ],
   "devDependencies": {
     "@types/node": "^22.15.17",
