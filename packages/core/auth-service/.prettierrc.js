@@ -1,4 +1,4 @@
-const baseConfig = require('../configs/.prettierrc.cjs');
+const baseConfig = require('../../shared/configs/.prettierrc.cjs');
 
 module.exports = {
   ...baseConfig,
