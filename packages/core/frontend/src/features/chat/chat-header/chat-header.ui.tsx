@@ -1,3 +1,4 @@
+import { useDebounce } from "@/src/shared/hooks/useDebounce";
 import { InputController } from "@/src/shared/ui/input-controller.ui";
 import { CustomLink } from "@/src/shared/ui/link.ui";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,8 +22,12 @@ export const ChatHeader = () => {
     defaultValue: "",
   });
 
+  const debouncedSearchValue = useDebounce({
+    value: searchValue,
+  });
+
   useEffect(() => {
-    if (searchValue) {
+    if (debouncedSearchValue.trim()) {
     }
   });
 
