@@ -17,6 +17,7 @@ export const InputController = ({ placeholder, onChange, control, name }: InputC
         <Flex direction="column" gap="1">
           <TextField.Root
             {...field}
+            size="3"
             onChange={(e) => {
               field.onChange(e);
               onChange?.(e.target.value);
