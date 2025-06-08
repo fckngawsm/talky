@@ -1,10 +1,5 @@
-import { ChatTabs } from "../../entities/chat/chat-tabs/chat-tabs.ui";
-import { ChatLayout } from "../../shared/layouts/chat.layout";
+import { ChatLayout } from "@/src/shared/layouts/chat.layout";
 
 export const ChatWidget = () => {
-  return (
-    <ChatLayout>
-      <ChatTabs />
-    </ChatLayout>
-  );
+  return <ChatLayout>Привет чат!</ChatLayout>;
 };
