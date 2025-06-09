@@ -1,3 +1,4 @@
+import type { Dialog } from "@/src/entities/chat/model/chat.types";
 import { BasedAvatar } from "@/src/shared/ui/avatar/avatar-based.ui";
 import {
   StyledChatAdditionalInfoTime,
@@ -9,14 +10,7 @@ import {
   StyledChatInfoWrapper,
 } from "./chat-dialog-item.styled";
 
-interface ChatDialogItemProps {
-  avatarUrl: string;
-  avatarAlt: string;
-  userName: string;
-  lastMessage: string;
-  unreadMessageCount: number;
-  lastMessageTime: string;
-}
+interface ChatDialogItemProps extends Omit<Dialog, "id"> {}
 
 export const ChatDialogItem = ({
   avatarAlt,

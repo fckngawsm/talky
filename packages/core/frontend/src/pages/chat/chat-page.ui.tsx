@@ -1,5 +1,10 @@
-import { ChatWidget } from "../../widgets/chat/chat.ui";
+import { ChatLayout } from "@/src/shared/layouts/chat.layout";
+import { ChatUsersListWidget } from "@/src/widgets/chat-dialogs-list/chat-dialogs-list.ui";
 
 export const ChatPage = () => {
-  return <ChatWidget />;
+  return (
+    <ChatLayout>
+      <ChatUsersListWidget dialogs={[]} />
+    </ChatLayout>
+  );
 };
