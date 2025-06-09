@@ -1,6 +1,6 @@
-import { useDebounce } from "@/src/shared/hooks/useDebounce";
-import { InputController } from "@/src/shared/ui/input-controller.ui";
-import { CustomLink } from "@/src/shared/ui/link.ui";
+import { useDebounce } from "@/shared/hooks/useDebounce";
+import { InputController } from "@/shared/ui/input-controller.ui";
+import { CustomLink } from "@/shared/ui/link.ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm, useWatch } from "react-hook-form";

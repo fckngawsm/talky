@@ -1,5 +1,5 @@
-import type { Dialog } from "@/src/entities/chat/model/chat.types";
-import { BasedAvatar } from "@/src/shared/ui/avatar/avatar-based.ui";
+import type { Dialog } from "@/entities/chat/model/chat.types";
+import { BasedAvatar } from "@/shared/ui/avatar/avatar-based.ui";
 import {
   StyledChatAdditionalInfoTime,
   StyledChatAdditionalInfoWrapper,
