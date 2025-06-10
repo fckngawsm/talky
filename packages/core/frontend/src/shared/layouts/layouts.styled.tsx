@@ -7,9 +7,11 @@ export const MainLayoutWrapper = styled(Section)`
 `;
 
 export const ChatLayoutWrapper = styled(Container)`
-  display: flex;
-  max-width: 25%;
-  width: 100%;
-  border-right: 1px solid rgb(153 153 153 / 100%);
-  height: 100vh;
+  .rt-ContainerInner {
+    display: flex;
+    max-width: 100%;
+    width: 100%;
+    border-right: 1px solid rgb(153 153 153 / 100%);
+    height: 100vh;
+  }
 `;

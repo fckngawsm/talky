@@ -12,7 +12,7 @@ export const ChatUsersListWidget = ({ dialogs }: ChatUsersListWidgetProps) => {
   const { onSelectChat } = useChat();
 
   return (
-    <Box overflow="scroll">
+    <Box overflow="scroll" width="25%" minWidth="120px">
       <ChatHeader />
       {dialogs.map((dialog) => (
         <ChatDialogItem onSelectChat={() => onSelectChat(dialog)} {...dialog} />
