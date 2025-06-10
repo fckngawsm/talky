@@ -1,6 +1,6 @@
 import { useDebounce } from "@/shared/hooks/useDebounce";
 import { InputController } from "@/shared/ui/input-controller/input-controller.ui";
-import { CustomLink } from "@/shared/ui/link.ui";
+import { CustomLink } from "@/shared/ui/link/link.ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { useEffect } from "react";
