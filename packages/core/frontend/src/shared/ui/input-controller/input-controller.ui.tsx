@@ -1,5 +1,6 @@
-import { Flex, Text, TextField } from "@radix-ui/themes";
+import { Flex, Text } from "@radix-ui/themes";
 import { Controller, type Control } from "react-hook-form";
+import { StyledRootTextFieldController } from "./input-controller.styled";
 
 interface InputControllerProps {
   control: Control<any>;
@@ -15,7 +16,7 @@ export const InputController = ({ placeholder, onChange, control, name }: InputC
       control={control}
       render={({ field, fieldState: { error } }) => (
         <Flex direction="column" gap="1">
-          <TextField.Root
+          <StyledRootTextFieldController
             {...field}
             size="3"
             onChange={(e) => {

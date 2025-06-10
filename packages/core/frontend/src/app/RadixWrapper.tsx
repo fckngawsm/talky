@@ -21,12 +21,7 @@ interface RadixWrapperProps {
 
 export const RadixWrapper = ({ children }: RadixWrapperProps) => {
   return (
-    <Theme
-      radius="medium"
-      appearance="light"
-      accentColor="iris"
-      panelBackground="solid"
-    >
+    <Theme radius="medium" appearance="light" accentColor="iris" panelBackground="solid">
       {children}
     </Theme>
   );

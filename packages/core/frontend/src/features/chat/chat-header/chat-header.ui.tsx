@@ -1,7 +1,8 @@
 import { useDebounce } from "@/shared/hooks/useDebounce";
-import { InputController } from "@/shared/ui/input-controller.ui";
+import { InputController } from "@/shared/ui/input-controller/input-controller.ui";
 import { CustomLink } from "@/shared/ui/link.ui";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { useEffect } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { ChatSearchDefaultValue } from "./chat-header.constants";
@@ -33,7 +34,7 @@ export const ChatHeader = () => {
 
   return (
     <StyledChatHeader>
-      <CustomLink to="/profile" />
+      <CustomLink to="/profile" icon={<ArrowRightIcon cursor="pointer" />} linkText="Профиль" />
       <InputController name="search" placeholder="Поиск" control={control} />
     </StyledChatHeader>
   );
