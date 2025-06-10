@@ -23,7 +23,8 @@
     "react-hook-form": "^7.56.2",
     "react-router-dom": "^7.6.0",
     "styled-components": "^6.1.18",
-    "zod": "^3.24.3"
+    "zod": "^3.24.3",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@talky/core-configs": "0.0.0",

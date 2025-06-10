@@ -1,4 +1,5 @@
 import type { Dialog } from "@/entities/chat/model/chat.types";
+import { useChat } from "@/providers/store/chat.store";
 import { BasedAvatar } from "@/shared/ui/avatar/avatar-based.ui";
 import {
   StyledChatAdditionalInfoTime,
@@ -10,18 +11,26 @@ import {
   StyledChatInfoWrapper,
 } from "./chat-dialog-item.styled";
 
-interface ChatDialogItemProps extends Omit<Dialog, "id"> {}
+interface ChatDialogItemProps extends Dialog {
+  onSelectChat: () => void;
+}
 
 export const ChatDialogItem = ({
+  id,
   avatarAlt,
   avatarUrl,
   userName,
   lastMessage,
   unreadMessageCount,
   lastMessageTime,
+  onSelectChat,
 }: ChatDialogItemProps) => {
+  const { selectedChat } = useChat();
+
+  const isChatSelected = selectedChat?.id === id;
+
   return (
-    <StyledChatDialogItemWrapper $isSelected>
+    <StyledChatDialogItemWrapper $isSelected={isChatSelected} onClick={onSelectChat}>
       <BasedAvatar src={avatarUrl} alt={avatarAlt} />
 
       <StyledChatInfoWrapper>
