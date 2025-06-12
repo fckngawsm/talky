@@ -11,7 +11,16 @@ export const ChatLayoutWrapper = styled(Container)`
     display: flex;
     max-width: 100%;
     width: 100%;
-    border-right: 1px solid rgb(153 153 153 / 100%);
     height: 100vh;
+  }
+`;
+
+export const ProfileLayoutWrapper = styled(Container)`
+  .rt-ContainerInner {
+    display: flex;
+    max-width: 100%;
+    width: 100%;
+    height: 100vh;
+    gap: 10px;
   }
 `;

@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { ChatLayoutWrapper } from "./layouts.styled";
+import { ChatLayoutWrapper } from "../layouts.styled";
 
 interface ChatLayoutProps {
   children: ReactNode;

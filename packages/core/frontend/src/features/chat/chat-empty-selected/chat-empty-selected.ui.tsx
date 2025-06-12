@@ -1,4 +1,4 @@
-import { StyledChatContentContainer } from "@/shared/layouts/chat-content.layout";
+import { StyledChatContentContainer } from "@/shared/layouts/chat/chat-content.layout";
 import { StyledEmptyText } from "./chat-empty-selected.styled";
 
 export const ChatEmptySelected = () => {
