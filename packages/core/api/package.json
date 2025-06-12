@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@talky/core-configs": "0.0.0",
-    "@talky/nats-module": "1.0.0",
+    "@talky/nats-module": "0.0.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
