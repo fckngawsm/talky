@@ -2,21 +2,21 @@ import type { Dialog } from "@/entities/chat/model/chat.types";
 import { ChatDialogItem } from "@/features/chat/chat-dialog-item/chat-dialog-item.ui";
 import { ChatHeader } from "@/features/chat/chat-header/chat-header.ui";
 import { useChat } from "@/providers/store/chat.store";
-import { Box } from "@radix-ui/themes";
+import { ChatDialogsListWidgetWrapper } from "./chat-dialog-list.styled";
 
-interface ChatUsersListWidgetProps {
+interface ChatDialogsListWidget {
   dialogs: Dialog[];
 }
 
-export const ChatUsersListWidget = ({ dialogs }: ChatUsersListWidgetProps) => {
+export const ChatDialogsListWidget = ({ dialogs }: ChatDialogsListWidget) => {
   const { onSelectChat } = useChat();
 
   return (
-    <Box overflow="scroll" width="25%" minWidth="120px">
+    <ChatDialogsListWidgetWrapper>
       <ChatHeader />
       {dialogs.map((dialog) => (
         <ChatDialogItem onSelectChat={() => onSelectChat(dialog)} {...dialog} />
       ))}
-    </Box>
+    </ChatDialogsListWidgetWrapper>
   );
 };
