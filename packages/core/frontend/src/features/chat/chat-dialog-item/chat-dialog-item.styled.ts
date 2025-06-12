@@ -55,8 +55,8 @@ export const StyledChatAdditionalUnreadMessageCount = styled(Text)`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: var(--purple-color);
-  color: var(--white-color);
+  background-color: #7d66d9;
+  color: #ffffff;
   width: 20px;
   height: 20px;
   font-size: 11px;

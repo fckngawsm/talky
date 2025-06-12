@@ -5,4 +5,5 @@ export const ChatDialogsListWidgetWrapper = styled(Box)`
   overflow: hidden;
   width: 25%;
   min-width: 220px;
+  border-right: 1px solid #3e63dd;
 `;
