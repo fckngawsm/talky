@@ -1,0 +1,11 @@
+{
+  "name": "@talky/nats-module",
+  "version": "1.0.0",
+  "main": "src/nats-transport.module.ts",
+  "types": "src/nats-transport.module.ts",
+  "dependencies": {
+    "@nestjs/microservices": "^10.0.0",
+    "@nestjs/common": "^10.0.0",
+    "nats": "^2.6.0"
+  }
+}
