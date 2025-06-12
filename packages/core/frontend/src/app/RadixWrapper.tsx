@@ -1,7 +1,7 @@
 import "../shared/base/normalize.css";
 // Base theme tokens
+import "@radix-ui/themes/styles.css";
 import "@radix-ui/themes/tokens/base.css";
-
 // Include just the colors you use, for example `ruby`, `teal`, and `slate`.
 // Remember to import the gray tint that matches your theme setting.
 import "@radix-ui/themes/tokens/colors/ruby.css";
