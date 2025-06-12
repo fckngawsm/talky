@@ -21,13 +21,13 @@ services:
     networks:
       - my-network
 
-  users-service:
-    container_name: users-service
+  user-service:
+    container_name: user-service
     build:
       context: .
-      dockerfile: packages/core/users-service/Dockerfile
+      dockerfile: packages/core/user-service/Dockerfile
     volumes:
-      - ./packages/core/users-service:/app
+      - ./packages/core/user-service:/app
       - /app/node_modules
     depends_on:
       mysql:
@@ -35,7 +35,7 @@ services:
       nats:
         condition: service_started
     env_file:
-      - ./packages/core/users-service/.env
+      - ./packages/core/user-service/.env
     ports:
       - "3002:3002"
     networks:
