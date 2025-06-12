@@ -1,4 +1,4 @@
-import type { Dialog } from "@/entities/chat/model/chat.types";
+import type { Dialog } from "@/entities/chat/chat.types";
 import { create } from "zustand";
 
 interface ChatStore {

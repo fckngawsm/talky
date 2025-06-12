@@ -24,3 +24,12 @@ export const ProfileLayoutWrapper = styled(Container)`
     gap: 10px;
   }
 `;
+
+export const SessionLayoutWrapper = styled(Container)`
+  .rt-ContainerInner {
+    display: flex;
+    max-width: 100%;
+    width: 100%;
+    height: 100vh;
+  }
+`;

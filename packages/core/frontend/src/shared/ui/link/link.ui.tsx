@@ -8,11 +8,11 @@ interface CustomLinkProps {
   icon?: ReactNode;
 }
 
-export const CustomLink = ({ to, linkText, icon }: CustomLinkProps) => {
+export const BasedLink = ({ to, linkText, icon }: CustomLinkProps) => {
   return (
     <StyledLink to={to}>
       {linkText}
-      <IconButton>{icon}</IconButton>
+      {icon && <IconButton>{icon}</IconButton>}
     </StyledLink>
   );
 };

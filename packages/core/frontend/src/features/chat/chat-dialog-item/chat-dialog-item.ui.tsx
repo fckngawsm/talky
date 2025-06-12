@@ -1,4 +1,4 @@
-import type { Dialog } from "@/entities/chat/model/chat.types";
+import type { Dialog } from "@/entities/chat/chat.types";
 import { useChat } from "@/providers/store/chat.store";
 import { BasedAvatar } from "@/shared/ui/avatar/avatar-based.ui";
 import {

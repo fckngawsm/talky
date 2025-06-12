@@ -1,4 +1,4 @@
-import type { Dialog } from "@/entities/chat/model/chat.types";
+import type { Dialog } from "@/entities/chat/chat.types";
 import { ChatDialogItem } from "@/features/chat/chat-dialog-item/chat-dialog-item.ui";
 import { ChatHeader } from "@/features/chat/chat-header/chat-header.ui";
 import { useChat } from "@/providers/store/chat.store";
