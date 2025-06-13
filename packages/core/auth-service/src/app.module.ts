@@ -1,7 +1,9 @@
 import { Module } from "@nestjs/common";
-import { AuthModule } from "./auth/auth.module";
+import { NatsTransportModule } from "@talky/nats-module";
+import { AuthController } from "./auth.controller";
 
 @Module({
-  imports: [AuthModule],
+  controllers: [AuthController],
+  imports: [NatsTransportModule],
 })
 export class AppModule {}
