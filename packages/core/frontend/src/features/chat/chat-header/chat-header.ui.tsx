@@ -35,7 +35,7 @@ export const ChatHeader = () => {
   return (
     <StyledChatHeader>
       <BasedLink to="/profile" icon={<ArrowRightIcon cursor="pointer" />} linkText="Профиль" />
-      <InputController name="search" placeholder="Поиск" control={control} />
+      <InputController name="search" control={control} rest={{ placeholder: "Поиск" }} />
     </StyledChatHeader>
   );
 };

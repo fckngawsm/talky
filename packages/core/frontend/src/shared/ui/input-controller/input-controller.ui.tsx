@@ -1,15 +1,15 @@
-import { Flex, Text } from "@radix-ui/themes";
+import { Flex, Text, TextField } from "@radix-ui/themes";
 import { Controller, type Control } from "react-hook-form";
 import { StyledRootTextFieldController } from "./input-controller.styled";
 
 interface InputControllerProps {
   control: Control<any>;
   name: string;
-  placeholder: string;
   onChange?: (value: string) => void;
+  rest?: TextField.RootProps;
 }
 
-export const InputController = ({ placeholder, onChange, control, name }: InputControllerProps) => {
+export const InputController = ({ onChange, control, name, ...rest }: InputControllerProps) => {
   return (
     <Controller
       name={name}
@@ -23,7 +23,7 @@ export const InputController = ({ placeholder, onChange, control, name }: InputC
               field.onChange(e);
               onChange?.(e.target.value);
             }}
-            placeholder={placeholder}
+            {...rest}
           />
           {Boolean(error) && (
             <Text color="red" size="1">

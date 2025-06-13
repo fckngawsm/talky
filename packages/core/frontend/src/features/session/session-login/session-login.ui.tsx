@@ -20,7 +20,11 @@ export const SessionLogin = () => {
       formTitle="Вход"
       onSubmit={() => {}}
     >
-      <InputController control={control} name="phone" placeholder="Номер телефона" />
+      <InputController
+        control={control}
+        name="phone"
+        rest={{ type: "tel", placeholder: "Номер телефона" }}
+      />
     </SessionRoot>
   );
 };
