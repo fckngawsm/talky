@@ -1,4 +1,5 @@
 import { SessionLoginWidget } from "@/widgets/session/session-login.widget";
+import { SessionRegisterWidget } from "@/widgets/session/session-register.widget";
 import { SessionRootPage } from "./session.ui";
 
 export const sessionRoute = {
@@ -7,8 +8,12 @@ export const sessionRoute = {
   children: [
     {
       index: true,
-      path: "login",
+      path: "sign-in",
       element: <SessionLoginWidget />,
+    },
+    {
+      path: "sign-up",
+      element: <SessionRegisterWidget />,
     },
   ],
 };

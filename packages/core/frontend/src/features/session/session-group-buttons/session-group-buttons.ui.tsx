@@ -4,16 +4,17 @@ import { StyledSessionGroupButton } from "./session-group-buttons.styled";
 
 interface SessionGroupButtonProps {
   linkText: string;
+  linkTo: string;
   buttonText: string;
 }
 
-export const SessionGroupButton = ({ linkText, buttonText }: SessionGroupButtonProps) => {
+export const SessionGroupButton = ({ linkText, buttonText, linkTo }: SessionGroupButtonProps) => {
   return (
     <StyledSessionGroupButton>
       <BasedButton buttonProps={{ size: "2", variant: "solid", radius: "medium" }}>
         {buttonText}
       </BasedButton>
-      <BasedLink to="sign-up" linkText={linkText} />
+      <BasedLink to={linkTo} linkText={linkText} />
     </StyledSessionGroupButton>
   );
 };

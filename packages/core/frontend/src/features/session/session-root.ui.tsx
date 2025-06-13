@@ -2,7 +2,6 @@ import { StyledSessionForm, StyledSessionFormWrapper } from "@/features/session/
 import type { ReactNode } from "react";
 
 interface SessionRootProps {
-  formTitle: string;
   children: ReactNode;
   buttonGroup?: ReactNode;
   onSubmit: () => void;

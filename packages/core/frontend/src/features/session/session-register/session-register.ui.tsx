@@ -3,21 +3,24 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { SessionGroupButton } from "../session-group-buttons/session-group-buttons.ui";
 import { SessionRoot } from "../session-root.ui";
-import { DEFAULT_LOGIN_VALUES } from "./session-login.constants";
-import { LoginSchema } from "./session-login.contract";
-import type { LoginFormData } from "./session-login.types";
+import { DEFAULT_REGISTER_VALUES } from "./session-register.contants";
+import { RegisterSchema } from "./session-register.contract";
+import type { RegisterFormData } from "./session-register.types";
 
-export const SessionLogin = () => {
-  const { control } = useForm<LoginFormData>({
-    resolver: zodResolver(LoginSchema),
+export const SessionRegister = () => {
+  const { control } = useForm<RegisterFormData>({
+    resolver: zodResolver(RegisterSchema),
     mode: "onChange",
-    defaultValues: DEFAULT_LOGIN_VALUES,
+    defaultValues: DEFAULT_REGISTER_VALUES,
   });
-
   return (
     <SessionRoot
       buttonGroup={
-        <SessionGroupButton linkTo="/sign-up" linkText="Зарегистрироваться" buttonText="Войти" />
+        <SessionGroupButton
+          linkTo="/sign-in"
+          linkText="Уже есть аккаунт?"
+          buttonText="Зарегистрироваться"
+        />
       }
       onSubmit={() => {}}
     >
