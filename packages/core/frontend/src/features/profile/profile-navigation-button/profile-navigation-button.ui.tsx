@@ -6,7 +6,7 @@ import { ProfileNavigationWrapper } from "./profile-navigation-button.styled";
 export const ProfileNavigationButton = () => {
   return (
     <ProfileNavigationWrapper>
-      <IconButton>
+      <IconButton variant="ghost" radius="full">
         <Link to="/chat">
           <ArrowLeftIcon />
         </Link>

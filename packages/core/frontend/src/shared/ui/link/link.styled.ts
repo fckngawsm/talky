@@ -11,4 +11,5 @@ export const StyledLink = styled(Link)`
   align-self: flex-end;
   color: #3e63dd;
   cursor: pointer;
+  gap: 10px;
 `;

@@ -12,7 +12,7 @@ export const BasedLink = ({ to, linkText, icon }: CustomLinkProps) => {
   return (
     <StyledLink to={to}>
       {linkText}
-      {icon && <IconButton>{icon}</IconButton>}
+      {icon && <IconButton variant="ghost">{icon}</IconButton>}
     </StyledLink>
   );
 };
