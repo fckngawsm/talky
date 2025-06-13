@@ -1,8 +1,4 @@
-import {
-  StyledSessionForm,
-  StyledSessionFormTitle,
-  StyledSessionFormWrapper,
-} from "@/features/session/session.styled";
+import { StyledSessionForm, StyledSessionFormWrapper } from "@/features/session/session.styled";
 import type { ReactNode } from "react";
 
 interface SessionRootProps {
@@ -12,14 +8,13 @@ interface SessionRootProps {
   onSubmit: () => void;
 }
 
-export const SessionRoot = ({ onSubmit, formTitle, children, buttonGroup }: SessionRootProps) => {
+export const SessionRoot = ({ onSubmit, children, buttonGroup }: SessionRootProps) => {
   return (
     <StyledSessionForm>
       <StyledSessionFormWrapper onSubmit={onSubmit}>
-        <StyledSessionFormTitle>{formTitle}</StyledSessionFormTitle>
         {children}
+        {buttonGroup}
       </StyledSessionFormWrapper>
-      {buttonGroup}
     </StyledSessionForm>
   );
 };

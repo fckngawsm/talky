@@ -3,5 +3,7 @@ import styled from "styled-components";
 export const StyledSessionGroupButton = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
+  max-width: 340px;
+  width: 100%;
 `;

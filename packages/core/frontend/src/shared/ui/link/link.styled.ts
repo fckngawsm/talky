@@ -8,7 +8,7 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
   display: flex;
   align-items: center;
-  align-self: flex-end;
+  align-self: center;
   color: #3e63dd;
   cursor: pointer;
   gap: 10px;

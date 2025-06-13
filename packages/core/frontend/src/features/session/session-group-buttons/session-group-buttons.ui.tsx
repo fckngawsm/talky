@@ -10,7 +10,9 @@ interface SessionGroupButtonProps {
 export const SessionGroupButton = ({ linkText, buttonText }: SessionGroupButtonProps) => {
   return (
     <StyledSessionGroupButton>
-      <BasedButton buttonProps={{ size: "2" }}>{buttonText}</BasedButton>
+      <BasedButton buttonProps={{ size: "2", variant: "solid", radius: "medium" }}>
+        {buttonText}
+      </BasedButton>
       <BasedLink to="sign-up" linkText={linkText} />
     </StyledSessionGroupButton>
   );

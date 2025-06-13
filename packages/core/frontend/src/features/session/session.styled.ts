@@ -15,12 +15,13 @@ export const StyledSessionFormWrapper = styled(Box)`
   width: 100%;
   padding: 50px 30px 30px;
   max-height: fit-content;
-  min-height: 450px;
+  min-height: fit-content;
   box-shadow: 0 0 6px 0 rgb(0 0 0 / 14%);
   border-radius: 12px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  gap: 15px;
 `;
 
 export const StyledSessionForm = styled.form`

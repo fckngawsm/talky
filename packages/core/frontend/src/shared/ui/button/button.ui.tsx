@@ -8,7 +8,13 @@ interface BasedButtonProps {
 
 export const BasedButton = ({ children, buttonProps }: BasedButtonProps) => {
   return (
-    <Button {...buttonProps} variant="outline">
+    <Button
+      style={{
+        cursor: "pointer",
+      }}
+      variant="outline"
+      {...buttonProps}
+    >
       {children}
     </Button>
   );
