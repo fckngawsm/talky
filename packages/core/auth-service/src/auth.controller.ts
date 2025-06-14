@@ -1,17 +1,32 @@
-import { Controller } from "@nestjs/common";
-import { MessagePattern, Payload } from "@nestjs/microservices";
-import { AUTH_PATTERNS, AuthSignContract, AuthSignResponseContract } from "@talky/nats-module";
+import { Controller, Inject } from "@nestjs/common";
+import { ClientProxy, MessagePattern, Payload } from "@nestjs/microservices";
+import {
+  AUTH_PATTERNS,
+  USER_PATTERNS,
+  UserGetByPhoneRequestContract,
+  UserGetByPhoneResponseContract,
+} from "@talky/nats-module";
+import { lastValueFrom } from "rxjs";
 
 @Controller()
 export class AuthController {
-  @MessagePattern(AUTH_PATTERNS.COMMAND_AUTH_REGISTER)
-  async handleRegister(@Payload() data: AuthSignContract): Promise<AuthSignResponseContract> {
-    const userId = "generated-user-id";
-    const token = "generated-jwt-token";
+  constructor(@Inject("NATS_SERVICE") private readonly natsClient: ClientProxy) {}
 
-    return {
-      userId,
-      token,
-    };
+  @MessagePattern(AUTH_PATTERNS.COMMAND_AUTH_REGISTER)
+  async handleRegister(@Payload() data: { phone: string }): Promise<string> {
+    const { phone } = data;
+
+    const response = await lastValueFrom(
+      this.natsClient.send<UserGetByPhoneResponseContract, UserGetByPhoneRequestContract>(
+        USER_PATTERNS.QUERY_GET_USER_BY_PHONE,
+        { phone },
+      ),
+    );
+
+    if (response?.isExist) {
+      throw new Error("Пользователь с указанным телефоном уже существует!");
+    }
+
+    return "1234";
   }
 }
