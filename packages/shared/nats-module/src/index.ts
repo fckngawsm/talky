@@ -1,5 +1,5 @@
 export * from "./nats-transport.module";
 // patterns
-export * from "./patterns/auth.patterns";
+export * from "./patterns/index";
 // contacts
-export * from "./contracts/auth.contract";
+export * from "./contracts/index";

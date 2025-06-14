@@ -1,6 +1,10 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { ClientProxy } from "@nestjs/microservices";
-import { AUTH_PATTERNS, AuthSignContract, AuthSignResponseContract } from "@talky/nats-module";
+import {
+  AUTH_PATTERNS,
+  AuthSignRequestContract,
+  AuthSignResponseContract,
+} from "@talky/nats-module";
 import { lastValueFrom } from "rxjs";
 
 @Injectable()
@@ -9,7 +13,7 @@ export class AuthService {
   async signIn(phone: string) {}
   async signUp(phone: string) {
     return await lastValueFrom(
-      this.natsClient.send<AuthSignResponseContract, AuthSignContract>(
+      this.natsClient.send<AuthSignResponseContract, AuthSignRequestContract>(
         AUTH_PATTERNS.COMMAND_AUTH_REGISTER,
         { phone },
       ),

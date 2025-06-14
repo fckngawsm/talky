@@ -1,4 +1,4 @@
-export class AuthSignContract {
+export class AuthSignRequestContract {
   phone: string;
 }
 
