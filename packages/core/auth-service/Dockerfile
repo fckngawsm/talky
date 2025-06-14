@@ -5,8 +5,7 @@ RUN apk add --no-cache python3 make g++ gcc musl-dev
 WORKDIR /app
 
 COPY package.json yarn.lock lerna.json ./
-COPY packages/core/auth-service/package.json ./packages/core/auth-service/
-COPY packages/shared/configs/package.json ./packages/shared/configs/
+COPY packages ./packages
 
 RUN yarn install --frozen-lockfile 
 
