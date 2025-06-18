@@ -1,22 +1,14 @@
-FROM node:20-alpine AS base
-
-RUN apk add --no-cache python3 make g++ gcc musl-dev
+FROM node:20
 
 WORKDIR /app
 
-COPY package.json yarn.lock lerna.json ./
-COPY packages ./packages
+COPY package.json lerna.json yarn.lock ./
+COPY packages/core/auth-service/package.json ./packages/core/auth-service/
+COPY packages/shared/configs/package.json ./packages/shared/configs/
+COPY packages/shared/nats-module/package.json ./packages/shared/nats-module/
 
-RUN yarn install --frozen-lockfile 
+RUN yarn install --frozen-lockfile
 
-FROM node:20-alpine
+CMD ["yarn", "dev"]
 
-WORKDIR /app
-
-COPY --from=base /app/node_modules ./node_modules
-COPY --from=base /app/packages/core/auth-service/node_modules ./packages/core/auth-service/node_modules
-COPY packages/core/auth-service ./packages/core/auth-service
-
-WORKDIR /app/packages/core/auth-service
-
-CMD ["npm", "run", "start:dev"]
+EXPOSE 3002

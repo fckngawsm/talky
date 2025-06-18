@@ -1,29 +1,14 @@
-FROM node:20-alpine AS base
-
-RUN apk add --no-cache python3 make g++ gcc musl-dev
+FROM node:20
 
 WORKDIR /app
 
-# 1. Копируем корневые конфиги
-COPY package.json yarn.lock lerna.json ./
-COPY packages ./packages
+COPY package.json lerna.json yarn.lock ./
+COPY packages/core/user-service/package.json ./packages/core/user-service/
+COPY packages/shared/configs/package.json ./packages/shared/configs/
+COPY packages/shared/nats-module/package.json ./packages/shared/nats-module/
 
-# 2. Устанавливаем зависимости
 RUN yarn install --frozen-lockfile
 
-# 3. Финальный образ
-FROM node:20-alpine
+CMD ["yarn", "dev"]
 
-WORKDIR /app
-
-# 4. Копируем только нужные зависимости сервиса
-COPY --from=base /app/packages/core/user-service/node_modules ./packages/core/user-service/node_modules
-
-# 5. Копируем ВЕСЬ код сервиса из ХОСТА (не из base-образа!)
-COPY ./packages/core/user-service ./packages/core/user-service
-
-WORKDIR /app/packages/core/user-service
-
-EXPOSE 3002
-
-CMD ["npm", "run", "start:dev"]
+EXPOSE 3003

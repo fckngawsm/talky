@@ -1,22 +1,13 @@
-FROM node:20-alpine AS base
-
-RUN apk add --no-cache python3 make g++ gcc musl-dev
+FROM node:20
 
 WORKDIR /app
 
-COPY package.json yarn.lock lerna.json ./
-COPY packages ./packages
+COPY package.json lerna.json yarn.lock ./
+COPY packages/core/frontend/package.json ./packages/core/frontend/
+COPY packages/shared/configs/package.json ./packages/shared/configs/
 
 RUN yarn install --frozen-lockfile
 
-FROM node:18-alpine
-
-WORKDIR /app
-
-COPY --from=base /app /app
-
-WORKDIR /app/packages/core/frontend
+CMD ["yarn", "dev"]
 
 EXPOSE 3000
-
-CMD ["npm", "run", "dev"]

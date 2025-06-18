@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: packages/core/api/Dockerfile
     volumes:
-      - ./packages/core/api:/app
+      - ./packages/core/api:/app/packages/core/api
       - /app/node_modules
     depends_on:
       mysql:
@@ -18,14 +18,13 @@ services:
       - "3001:3001"
     networks:
       - my-network
-
   user-service:
     container_name: user-service
     build:
       context: .
       dockerfile: packages/core/user-service/Dockerfile
     volumes:
-      - ./packages/core/user-service:/app
+      - ./packages/core/user-service:/app/packages/core/user-service
       - /app/node_modules
     depends_on:
       mysql:
@@ -38,14 +37,13 @@ services:
       - "3002:3002"
     networks:
       - my-network
-
   auth-service:
     container_name: auth-service
     build:
       context: .
       dockerfile: packages/core/auth-service/Dockerfile
     volumes:
-      - ./packages/core/auth-service:/app
+      - ./packages/core/auth-service:/app/packages/core/auth-service
       - /app/node_modules
     depends_on:
       mysql:
@@ -58,7 +56,22 @@ services:
       - "3004:3004"
     networks:
       - my-network
-
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: packages/core/frontend/Dockerfile
+    volumes:
+      - ./packages/core/frontend:/app/packages/core/frontend
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./packages/core/frontend/.env
+    depends_on:
+      - api
+    networks:
+      - my-network
   mysql:
     container_name: mysql
     image: mysql:8.0
@@ -75,7 +88,6 @@ services:
       retries: 5
     networks:
       - my-network
-
   nats:
     container_name: nats
     image: nats:latest
@@ -83,24 +95,7 @@ services:
       - "4222:4222"
       - "8222:8222"
     networks:
-      - my-network
-
-  frontend:
-    container_name: frontend
-    build:
-      context: .
-      dockerfile: packages/core/frontend/Dockerfile
-    volumes:
-      - ./packages/core/frontend:/app/packages/core/frontend
-      - ./packages/shared:/app/packages/shared
-    ports:
-      - "3000:3000"
-    env_file:
-      - ./packages/core/frontend/.env
-    depends_on:
-      - api
-    networks:
-      - my-network
+      - my-network      
 
 networks:
   my-network:
