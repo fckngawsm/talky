@@ -2,9 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { UsersOtp } from "../users-otp/users-otp.entity";
 
 @Entity("users")
 export class User {
@@ -22,6 +24,9 @@ export class User {
 
   @Column({ nullable: true })
   lastName?: string;
+
+  @OneToOne(() => UsersOtp, (otp) => otp.user)
+  otp: UsersOtp;
 
   @CreateDateColumn()
   createdAt: Date;
