@@ -1,4 +1,5 @@
 import { Box, Text } from "@radix-ui/themes";
+import { unstable_OneTimePasswordField as OneTimePasswordField } from "radix-ui";
 import styled from "styled-components";
 
 export const StyledSessionFormTitle = styled(Text)`
@@ -31,4 +32,27 @@ export const StyledSessionForm = styled.form`
   justify-content: center;
   gap: 16px;
   width: 100%;
+`;
+
+export const StyledPasswordField = styled(OneTimePasswordField.Input)`
+  width: 3rem;
+  height: 3rem;
+  margin: 0 0.25rem;
+  font-size: 1.5rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
+  }
+
+  &::placeholder {
+    color: #bbb;
+  }
 `;
