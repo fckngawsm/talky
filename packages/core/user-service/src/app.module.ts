@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { NatsTransportModule } from "@talky/nats-module";
+import { UsersOtpModule } from "./modules/users-otp/users-otp.module";
 import { UsersModule } from "./modules/users/users.module";
 @Module({
   imports: [
@@ -14,8 +15,9 @@ import { UsersModule } from "./modules/users/users.module";
       entities: [__dirname + "/**/*.entity{.ts,.js}"],
       synchronize: process.env.NODE_ENV === "development",
     }),
-    UsersModule,
     NatsTransportModule,
+    UsersModule,
+    UsersOtpModule,
   ],
 })
 export class AppModule {}
