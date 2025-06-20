@@ -1,6 +1,7 @@
 import { InputController } from "@/shared/ui/input-controller/input-controller.ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useSearchParams } from "react-router-dom";
 import { SessionGroupButton } from "../session-group-buttons/session-group-buttons.ui";
 import { SessionRoot } from "../session-root.ui";
 import { DEFAULT_REGISTER_VALUES } from "./session-register.contants";
@@ -8,11 +9,18 @@ import { RegisterSchema } from "./session-register.contract";
 import type { RegisterFormData } from "./session-register.types";
 
 export const SessionRegister = () => {
-  const { control } = useForm<RegisterFormData>({
+  const [_, setSearchParams] = useSearchParams();
+
+  const { control, handleSubmit } = useForm<RegisterFormData>({
     resolver: zodResolver(RegisterSchema),
     mode: "onChange",
     defaultValues: DEFAULT_REGISTER_VALUES,
   });
+
+  const onSubmit = handleSubmit((data: RegisterFormData) => {
+    setSearchParams(data.phone);
+  });
+
   return (
     <SessionRoot
       buttonGroup={
@@ -22,7 +30,7 @@ export const SessionRegister = () => {
           buttonText="Зарегистрироваться"
         />
       }
-      onSubmit={() => {}}
+      onSubmit={onSubmit}
     >
       <InputController
         control={control}
