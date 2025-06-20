@@ -1,7 +1,7 @@
 import { InputController } from "@/shared/ui/input-controller/input-controller.ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { SessionGroupButton } from "../session-group-buttons/session-group-buttons.ui";
 import { SessionRoot } from "../session-root.ui";
 import { DEFAULT_REGISTER_VALUES } from "./session-register.contants";
@@ -10,7 +10,7 @@ import type { RegisterFormData } from "./session-register.types";
 
 export const SessionRegister = () => {
   const [_, setSearchParams] = useSearchParams();
-
+  const navigate = useNavigate();
   const { control, handleSubmit } = useForm<RegisterFormData>({
     resolver: zodResolver(RegisterSchema),
     mode: "onChange",
@@ -18,6 +18,7 @@ export const SessionRegister = () => {
   });
 
   const onSubmit = handleSubmit((data: RegisterFormData) => {
+    navigate("/confirm-phone");
     setSearchParams({ phone: data.phone });
   });
 

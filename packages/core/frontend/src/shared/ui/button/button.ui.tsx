@@ -12,6 +12,7 @@ export const BasedButton = ({ children, buttonProps }: BasedButtonProps) => {
       style={{
         cursor: "pointer",
       }}
+      type="submit"
       variant="outline"
       {...buttonProps}
     >

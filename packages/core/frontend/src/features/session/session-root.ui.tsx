@@ -9,8 +9,8 @@ interface SessionRootProps {
 
 export const SessionRoot = ({ onSubmit, children, buttonGroup }: SessionRootProps) => {
   return (
-    <StyledSessionForm>
-      <StyledSessionFormWrapper onSubmit={onSubmit}>
+    <StyledSessionForm onSubmit={onSubmit}>
+      <StyledSessionFormWrapper>
         {children}
         {buttonGroup}
       </StyledSessionFormWrapper>

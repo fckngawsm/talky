@@ -34,6 +34,11 @@ export const StyledSessionForm = styled.form`
   width: 100%;
 `;
 
+export const StyledPasswordFieldsWrapper = styled(OneTimePasswordField.Root)`
+  display: flex;
+  justify-content: center;
+`;
+
 export const StyledPasswordField = styled(OneTimePasswordField.Input)`
   width: 3rem;
   height: 3rem;
