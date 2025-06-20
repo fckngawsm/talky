@@ -18,7 +18,7 @@ export const SessionRegister = () => {
   });
 
   const onSubmit = handleSubmit((data: RegisterFormData) => {
-    setSearchParams(data.phone);
+    setSearchParams({ phone: data.phone });
   });
 
   return (
