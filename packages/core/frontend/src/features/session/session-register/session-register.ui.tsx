@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { SessionGroupButton } from "../session-group-buttons/session-group-buttons.ui";
 import { SessionRoot } from "../session-root.ui";
+import { registerUser } from "./session-register.api";
 import { DEFAULT_REGISTER_VALUES } from "./session-register.contants";
 import { RegisterSchema } from "./session-register.contract";
 import type { RegisterFormData } from "./session-register.types";
@@ -17,9 +18,12 @@ export const SessionRegister = () => {
     defaultValues: DEFAULT_REGISTER_VALUES,
   });
 
-  const onSubmit = handleSubmit((data: RegisterFormData) => {
-    navigate("/confirm-phone");
-    setSearchParams({ phone: data.phone });
+  const onSubmit = handleSubmit(async (data: RegisterFormData) => {
+    try {
+      await registerUser(data);
+      navigate("/confirm-phone");
+      setSearchParams({ phone: data.phone });
+    } catch (error) {}
   });
 
   return (

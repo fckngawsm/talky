@@ -12,11 +12,15 @@ export class AuthService {
   constructor(@Inject("NATS_SERVICE") private readonly natsClient: ClientProxy) {}
   async signIn(phone: string) {}
   async signUp(phone: string) {
-    return await lastValueFrom(
+    const code = await lastValueFrom(
       this.natsClient.send<AuthSignResponseContract, AuthSignRequestContract>(
         AUTH_PATTERNS.COMMAND_AUTH_REGISTER,
         { phone },
       ),
     );
+
+    if (!code) {
+      throw new Error("Произошла ошибка при отправки кода");
+    }
   }
 }
