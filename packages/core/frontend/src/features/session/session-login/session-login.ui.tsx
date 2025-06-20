@@ -1,6 +1,7 @@
 import { InputController } from "@/shared/ui/input-controller/input-controller.ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useSearchParams } from "react-router-dom";
 import { SessionGroupButton } from "../session-group-buttons/session-group-buttons.ui";
 import { SessionRoot } from "../session-root.ui";
 import { DEFAULT_LOGIN_VALUES } from "./session-login.constants";
@@ -8,10 +9,16 @@ import { LoginSchema } from "./session-login.contract";
 import type { LoginFormData } from "./session-login.types";
 
 export const SessionLogin = () => {
-  const { control } = useForm<LoginFormData>({
+  const [_, setSearchParams] = useSearchParams();
+
+  const { control, handleSubmit } = useForm<LoginFormData>({
     resolver: zodResolver(LoginSchema),
     mode: "onChange",
     defaultValues: DEFAULT_LOGIN_VALUES,
+  });
+
+  const onSubmit = handleSubmit((data: LoginFormData) => {
+    setSearchParams({ phone: data.phone });
   });
 
   return (
@@ -19,7 +26,7 @@ export const SessionLogin = () => {
       buttonGroup={
         <SessionGroupButton linkTo="/sign-up" linkText="Зарегистрироваться" buttonText="Войти" />
       }
-      onSubmit={() => {}}
+      onSubmit={onSubmit}
     >
       <InputController
         control={control}
