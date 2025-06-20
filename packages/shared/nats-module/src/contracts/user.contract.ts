@@ -3,5 +3,13 @@ export class UserGetByPhoneRequestContract {
 }
 
 export class UserGetByPhoneResponseContract {
-  isExist: boolean | null;
+  user: any;
+}
+
+export class UserGetOtpCodeRequestContract {
+  userId: number;
+}
+
+export class UserGetOtpCodeResponseContract {
+  code: string;
 }

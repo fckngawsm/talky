@@ -1,11 +1,18 @@
 {
   "compilerOptions": {
+    "target": "ES2019", // Современный таргет, можно ES6 если хочешь
     "module": "commonjs",
-    "target": "es6",
-    "declaration": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "types": ["node"]
+    "declaration": true, // Генерация .d.ts
+    "declarationMap": true, // Карты для .d.ts (удобно для IDE)
+    "outDir": "./dist", // Куда компилируем
+    "rootDir": "./src", // Где исходники
+    "strict": true, // Включить строгий режим
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "types": ["node"], // Для node
+    "sourceMap": true, // Генерация source map
+    "strictPropertyInitialization": false
   },
   "include": ["src/**/*"]
 }

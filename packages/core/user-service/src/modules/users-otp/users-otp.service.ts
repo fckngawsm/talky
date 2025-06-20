@@ -1,5 +1,11 @@
 import { Injectable } from "@nestjs/common";
+import { MessagePattern } from "@nestjs/microservices";
 import { InjectRepository } from "@nestjs/typeorm";
+import {
+  USER_PATTERNS,
+  UserGetOtpCodeRequestContract,
+  UserGetOtpCodeResponseContract,
+} from "@talky/nats-module";
 import { Repository } from "typeorm";
 import { UsersOtp } from "./users-otp.entity";
 
@@ -10,12 +16,19 @@ export class UsersOtpService {
     private readonly userOtpRepository: Repository<UsersOtp>,
   ) {}
 
-  async generateAndSaveOtpCode(userId: number) {
-    const generatedCode = (1000 + Math.random() * 9000).toString();
+  @MessagePattern(USER_PATTERNS.QUERY_GET_USER_OTP_CODE)
+  generateAndSaveOtpCode({
+    userId,
+  }: UserGetOtpCodeRequestContract): UserGetOtpCodeResponseContract {
+    const code = (1000 + Math.random() * 9000).toString();
 
-    return this.userOtpRepository.create({
+    this.userOtpRepository.create({
       userId,
-      code: generatedCode,
+      code,
     });
+
+    return {
+      code,
+    };
   }
 }

@@ -5,6 +5,8 @@ import {
   USER_PATTERNS,
   UserGetByPhoneRequestContract,
   UserGetByPhoneResponseContract,
+  UserGetOtpCodeRequestContract,
+  UserGetOtpCodeResponseContract,
 } from "@talky/nats-module";
 import { lastValueFrom } from "rxjs";
 
@@ -16,17 +18,24 @@ export class AuthController {
   async handleRegister(@Payload() data: { phone: string }): Promise<string> {
     const { phone } = data;
 
-    const response = await lastValueFrom(
+    const { user } = await lastValueFrom(
       this.natsClient.send<UserGetByPhoneResponseContract, UserGetByPhoneRequestContract>(
         USER_PATTERNS.QUERY_GET_USER_BY_PHONE,
         { phone },
       ),
     );
 
-    if (response?.isExist) {
+    if (user?.id) {
       throw new Error("Пользователь с указанным телефоном уже существует!");
     }
 
-    return "1234";
+    const { code } = await lastValueFrom(
+      this.natsClient.send<UserGetOtpCodeResponseContract, UserGetOtpCodeRequestContract>(
+        USER_PATTERNS.QUERY_GET_USER_OTP_CODE,
+        { userId: user?.id },
+      ),
+    );
+
+    return code;
   }
 }

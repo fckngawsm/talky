@@ -19,6 +19,6 @@ export class UsersController {
 
     const user = await this.usersService.findByPhone(phone);
 
-    return { isExist: Boolean(user) };
+    return { user };
   }
 }
