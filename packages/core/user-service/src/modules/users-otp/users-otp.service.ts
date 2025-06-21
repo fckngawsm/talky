@@ -20,7 +20,6 @@ export class UsersOtpService {
   @MessagePattern(USER_PATTERNS.COMMAND_GENERATE_USER_OTP_CODE)
   generateAndSaveOtpCode({ userId }: UserGetOtpCodeRequestContract): { message: string } {
     const code = (1000 + Math.random() * 9000).toString();
-
     this.userOtpRepository.create({
       userId,
       code,
