@@ -19,6 +19,7 @@ export class AuthController {
   async handleRegister(
     @Payload() data: { phone: string },
   ): Promise<{ status: string; message?: string }> {
+    console.log(data, "data");
     const { phone } = data;
 
     const { user } = await lastValueFrom(

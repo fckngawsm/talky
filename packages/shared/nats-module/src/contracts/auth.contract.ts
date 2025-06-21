@@ -3,6 +3,6 @@ export class AuthSignRequestContract {
 }
 
 export class AuthSignResponseContract {
-  userId: string;
-  token: string;
+  status: string;
+  message?: string;
 }

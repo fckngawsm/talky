@@ -15,14 +15,16 @@ export class AuthService {
   constructor(@Inject("NATS_SERVICE") private readonly natsClient: ClientProxy) {}
   async signIn(phone: string) {}
   async signUp(phone: string) {
-    const code = await lastValueFrom(
+    const { status } = await lastValueFrom(
       this.natsClient.send<AuthSignResponseContract, AuthSignRequestContract>(
         AUTH_PATTERNS.COMMAND_AUTH_REGISTER,
         { phone },
       ),
     );
 
-    if (!code) {
+    console.log(status, "status");
+
+    if (status !== "ok") {
       throw new Error("Произошла ошибка при отправки кода");
     }
   }
@@ -31,7 +33,7 @@ export class AuthService {
     const code = await lastValueFrom(
       this.natsClient.send<UserConfirmOtpCodeResponseContract, UserConfirmOtpCodeRequestContract>(
         USER_PATTERNS.COMMAND_CONFIRM_USER_OTP_CODE,
-        { userId: data.userId, code: data.userId },
+        { userId: data.userId, code: data.code },
       ),
     );
   }

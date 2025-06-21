@@ -15,11 +15,14 @@ export class UsersService {
   }
 
   async createUser(phone: string): Promise<User | null> {
-    return this.userRepository.create({
+    const user = this.userRepository.create({
       phone,
       login: `${Date.now()}-login`,
       lastName: `${Date.now()}-lastName`,
       firstName: `${Date.now()}-firstName`,
     });
+
+    await this.userRepository.save(user);
+    return user;
   }
 }
