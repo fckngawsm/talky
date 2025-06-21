@@ -2,6 +2,8 @@ import { Controller } from "@nestjs/common";
 import { MessagePattern, Payload } from "@nestjs/microservices";
 import {
   USER_PATTERNS,
+  UserCreateRequestContract,
+  UserCreateResponseContract,
   UserGetByPhoneRequestContract,
   UserGetByPhoneResponseContract,
 } from "@talky/nats-module";
@@ -18,6 +20,17 @@ export class UsersController {
     const { phone } = data;
 
     const user = await this.usersService.findByPhone(phone);
+
+    return { user };
+  }
+
+  @MessagePattern(USER_PATTERNS.COMMAND_CREATE_USER)
+  async createUser(
+    @Payload() data: UserCreateRequestContract,
+  ): Promise<UserCreateResponseContract> {
+    const { phone } = data;
+
+    const user = await this.usersService.createUser(phone);
 
     return { user };
   }

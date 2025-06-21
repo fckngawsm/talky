@@ -13,4 +13,13 @@ export class UsersService {
   async findByPhone(phone: string): Promise<User | null> {
     return this.userRepository.findOne({ where: { phone } });
   }
+
+  async createUser(phone: string): Promise<User | null> {
+    return this.userRepository.create({
+      phone,
+      login: `${Date.now()}-login`,
+      lastName: `${Date.now()}-lastName`,
+      firstName: `${Date.now()}-firstName`,
+    });
+  }
 }

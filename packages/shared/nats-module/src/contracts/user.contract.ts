@@ -10,6 +10,10 @@ export class UserGetOtpCodeRequestContract {
   userId: number;
 }
 
-export class UserGetOtpCodeResponseContract {
-  code: string;
+export class UserCreateResponseContract {
+  user: any;
+}
+
+export class UserCreateRequestContract {
+  phone: string;
 }
