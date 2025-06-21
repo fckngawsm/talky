@@ -6,6 +6,7 @@ services:
       dockerfile: packages/core/api/Dockerfile
     volumes:
       - ./packages/core/api:/app/packages/core/api
+      - ./packages/shared:/app/packages/shared
       - /app/node_modules
     depends_on:
       mysql:
@@ -25,6 +26,7 @@ services:
       dockerfile: packages/core/user-service/Dockerfile
     volumes:
       - ./packages/core/user-service:/app/packages/core/user-service
+      - ./packages/shared:/app/packages/shared
       - /app/node_modules
     depends_on:
       mysql:
@@ -44,6 +46,7 @@ services:
       dockerfile: packages/core/auth-service/Dockerfile
     volumes:
       - ./packages/core/auth-service:/app/packages/core/auth-service
+      - ./packages/shared:/app/packages/shared
       - /app/node_modules
     depends_on:
       mysql:

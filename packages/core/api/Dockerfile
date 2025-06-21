@@ -14,7 +14,7 @@ COPY packages/shared/configs/ ./packages/shared/configs/
 COPY packages/shared/nats-module/ ./packages/shared/nats-module/
 COPY packages/core/api/ ./packages/core/api/
 
-RUN cd packages/shared/nats-module && yarn install && yarn build
+RUN cd packages/shared/nats-module && yarn install
 
 CMD ["yarn", "dev"]
 

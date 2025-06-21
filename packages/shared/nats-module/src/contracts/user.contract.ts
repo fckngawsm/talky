@@ -17,3 +17,12 @@ export class UserCreateResponseContract {
 export class UserCreateRequestContract {
   phone: string;
 }
+
+export class UserConfirmOtpCodeRequestContract {
+  userId: number;
+  code: string;
+}
+
+export class UserConfirmOtpCodeResponseContract {
+  isSuccess: boolean;
+}
