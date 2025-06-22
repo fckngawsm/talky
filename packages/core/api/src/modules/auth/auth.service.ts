@@ -30,11 +30,12 @@ export class AuthService {
   }
 
   async confirmOtp(data: { code: string; userId: number }) {
-    const code = await lastValueFrom(
+    const { isSuccess } = await lastValueFrom(
       this.natsClient.send<UserConfirmOtpCodeResponseContract, UserConfirmOtpCodeRequestContract>(
         USER_PATTERNS.COMMAND_CONFIRM_USER_OTP_CODE,
         { userId: data.userId, code: data.code },
       ),
     );
+    console.log(isSuccess, "isSuccess");
   }
 }

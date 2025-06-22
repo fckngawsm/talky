@@ -1,13 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { MessagePattern } from "@nestjs/microservices";
 import { InjectRepository } from "@nestjs/typeorm";
-import {
-  USER_PATTERNS,
-  UserConfirmOtpCodeRequestContract,
-  UserConfirmOtpCodeResponseContract,
-  UserGetOtpCodeRequestContract,
-} from "@talky/nats-module";
-import { Repository } from "typeorm";
+import { MoreThan, Repository } from "typeorm";
 import { UsersOtp } from "./users-otp.entity";
 
 @Injectable()
@@ -17,35 +10,21 @@ export class UsersOtpService {
     private readonly userOtpRepository: Repository<UsersOtp>,
   ) {}
 
-  @MessagePattern(USER_PATTERNS.COMMAND_GENERATE_USER_OTP_CODE)
-  generateAndSaveOtpCode({ userId }: UserGetOtpCodeRequestContract): { message: string } {
-    const code = (1000 + Math.random() * 9000).toString();
-    this.userOtpRepository.create({
+  async generateAndSaveOtpCode(userId: number) {
+    const code = Math.floor(1000 + Math.random() * 9000).toString();
+    const otp = this.userOtpRepository.create({
       userId,
       code,
+      expiresAt: new Date(Date.now() + 60 * 1000),
     });
-
-    return {
-      message: "otp generated",
-    };
+    await this.userOtpRepository.save(otp);
+    return { message: "otp generated" };
   }
 
-  @MessagePattern(USER_PATTERNS.COMMAND_CONFIRM_USER_OTP_CODE)
-  confirmOtpCode({
-    userId,
-    code,
-  }: UserConfirmOtpCodeRequestContract): UserConfirmOtpCodeResponseContract {
-    const foundedCodeData = this.userOtpRepository.findOne({
-      where: {
-        user: {
-          id: userId,
-        },
-        code,
-      },
+  async confirmOtpCode(userId: number, code: string) {
+    const otp = await this.userOtpRepository.findOne({
+      where: { userId, code, expiresAt: MoreThan(new Date()) },
     });
-
-    return {
-      isSuccess: Boolean(foundedCodeData),
-    };
+    return { isSuccess: Boolean(otp) };
   }
 }

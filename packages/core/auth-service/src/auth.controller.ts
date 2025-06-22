@@ -39,7 +39,9 @@ export class AuthController {
         { phone },
       ),
     );
-
+    console.log("Emitting OTP event", USER_PATTERNS.COMMAND_GENERATE_USER_OTP_CODE, {
+      userId: newUser?.id,
+    });
     this.natsClient.emit<UserGetOtpCodeRequestContract>(
       USER_PATTERNS.COMMAND_GENERATE_USER_OTP_CODE,
       {
