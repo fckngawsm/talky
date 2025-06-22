@@ -1,9 +1,11 @@
 import { NestFactory } from "@nestjs/core";
 import { Transport } from "@nestjs/microservices";
 import { AppModule } from "./app.module";
+import { GlobalHttpExceptionFilter } from "./common/filters/global-http-exception.filter";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.useGlobalFilters(new GlobalHttpExceptionFilter());
   app.enableCors();
   app.connectMicroservice({
     transport: Transport.NATS,
