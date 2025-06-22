@@ -1,5 +1,5 @@
 import { Controller, Inject } from "@nestjs/common";
-import { ClientProxy, MessagePattern, Payload } from "@nestjs/microservices";
+import { ClientProxy, MessagePattern, Payload, RpcException } from "@nestjs/microservices";
 import {
   AUTH_PATTERNS,
   USER_PATTERNS,
@@ -30,7 +30,7 @@ export class AuthController {
     );
 
     if (user?.id) {
-      throw new Error("Пользователь с указанным телефоном уже существует!");
+      throw new RpcException("Пользователь с указанным телефоном уже существует!");
     }
 
     const { user: newUser } = await lastValueFrom(

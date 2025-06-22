@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { ClientProxy } from "@nestjs/microservices";
+import { ClientProxy, RpcException } from "@nestjs/microservices";
 import {
   AUTH_PATTERNS,
   AuthSignRequestContract,
@@ -25,7 +25,7 @@ export class AuthService {
     console.log(status, "status");
 
     if (status !== "ok") {
-      throw new Error("Произошла ошибка при отправки кода");
+      throw new RpcException("Произошла ошибка при отправки кода");
     }
   }
 
