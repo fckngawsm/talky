@@ -1,3 +1,4 @@
+import { useTimer } from "@/shared/hooks/useTimer";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { unstable_OneTimePasswordField as OneTimePasswordField } from "radix-ui";
 import { Controller, useForm } from "react-hook-form";
@@ -14,13 +15,13 @@ import { DEFAULT_CONFIRM_OTP_VALUES } from "./session-confirm-phone.constants";
 import { ConfirmOtpSchema } from "./session-confirm-phone.contract";
 import type { ConfirmOtpData } from "./session-confirm-phone.types";
 
+import { Button } from "@radix-ui/themes";
+
 export const SessionConfirmPhone = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<ConfirmOtpData>({
+  const [searchParams] = useSearchParams();
+  const { secondsLeft, startTimer } = useTimer();
+
+  const { handleSubmit, control } = useForm<ConfirmOtpData>({
     mode: "onChange",
     defaultValues: DEFAULT_CONFIRM_OTP_VALUES,
     resolver: zodResolver(ConfirmOtpSchema),
@@ -28,9 +29,16 @@ export const SessionConfirmPhone = () => {
 
   const onSubmit = handleSubmit((data) => {
     const formattedData = { ...data, phone: searchParams.get("phone") };
-
-    setSearchParams({});
+    console.log("Подтверждение кода", formattedData);
   });
+
+  const handleResendCode = () => {
+    const phone = searchParams.get("phone");
+    if (phone) {
+      console.log("Повторная отправка кода для", phone);
+      startTimer();
+    }
+  };
 
   return (
     <SessionRoot
@@ -41,6 +49,7 @@ export const SessionConfirmPhone = () => {
       <StyledSessionDescription>
         Мы отправили смс с кодом на номер {searchParams.get("phone")}
       </StyledSessionDescription>
+
       <Controller
         name="code"
         control={control}
@@ -54,6 +63,16 @@ export const SessionConfirmPhone = () => {
           </StyledPasswordFieldsWrapper>
         )}
       />
+
+      <StyledSessionDescription>
+        {secondsLeft !== null ? (
+          `Запросить код можно через: ${secondsLeft}`
+        ) : (
+          <Button onClick={handleResendCode} variant="soft" size="2">
+            Отправить код повторно
+          </Button>
+        )}
+      </StyledSessionDescription>
     </SessionRoot>
   );
 };

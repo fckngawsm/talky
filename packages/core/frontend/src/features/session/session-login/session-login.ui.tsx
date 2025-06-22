@@ -1,3 +1,4 @@
+import { useTimer } from "@/shared/hooks/useTimer";
 import { InputController } from "@/shared/ui/input-controller/input-controller.ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -11,6 +12,7 @@ import type { LoginFormData } from "./session-login.types";
 export const SessionLogin = () => {
   const [_, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { startTimer } = useTimer();
   const { control, handleSubmit } = useForm<LoginFormData>({
     resolver: zodResolver(LoginSchema),
     mode: "onChange",
@@ -20,6 +22,7 @@ export const SessionLogin = () => {
   const onSubmit = handleSubmit((data: LoginFormData) => {
     navigate("/confirm-phone");
     setSearchParams({ phone: data.phone });
+    startTimer();
   });
 
   return (

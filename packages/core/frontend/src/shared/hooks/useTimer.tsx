@@ -7,31 +7,6 @@ export const useTimer = () => {
   const animationRef = useRef<number | null>(null);
   const endTimeRef = useRef<number | null>(null);
 
-  const startTimer = useCallback((duration: number = ONE_MINUTE_IN_SEC) => {
-    endTimeRef.current = Date.now() + duration * 1000;
-    localStorage.setItem("codeTimerEnd", String(endTimeRef.current));
-    animationRef.current = requestAnimationFrame(updateTimer);
-  }, []);
-
-  useEffect(() => {
-    const savedEndTime = localStorage.getItem("codeTimerEnd");
-    if (savedEndTime) {
-      const remaining = Math.max(0, Math.floor((Number(savedEndTime) - Date.now()) / 1000));
-      if (remaining > 0) {
-        setSecondsLeft(remaining);
-        startTimer(remaining);
-      } else {
-        localStorage.removeItem("codeTimerEnd");
-      }
-    }
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, []);
-
   const updateTimer = useCallback(() => {
     if (!endTimeRef.current) return;
 
@@ -48,9 +23,46 @@ export const useTimer = () => {
     }
   }, []);
 
+  const startTimer = useCallback(
+    (duration: number = ONE_MINUTE_IN_SEC) => {
+      const newEndTime = Date.now() + duration * 1000;
+      endTimeRef.current = newEndTime;
+      localStorage.setItem("codeTimerEnd", String(newEndTime));
+
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+
+      animationRef.current = requestAnimationFrame(updateTimer);
+    },
+    [updateTimer],
+  );
+
+  useEffect(() => {
+    const savedEndTime = localStorage.getItem("codeTimerEnd");
+
+    if (savedEndTime) {
+      const endTime = Number(savedEndTime);
+      const remaining = Math.max(0, Math.floor((endTime - Date.now()) / 1000));
+
+      if (remaining > 0) {
+        endTimeRef.current = endTime;
+        setSecondsLeft(remaining);
+        animationRef.current = requestAnimationFrame(updateTimer);
+      } else {
+        localStorage.removeItem("codeTimerEnd");
+      }
+    }
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [updateTimer]);
+
   return {
     secondsLeft,
-    animationRefCurrent: animationRef?.current,
     startTimer,
   };
 };
