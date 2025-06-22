@@ -6,10 +6,15 @@ interface InputControllerProps {
   control: Control<any>;
   name: string;
   onChange?: (value: string) => void;
-  rest?: TextField.RootProps;
+  textFieldProps?: TextField.RootProps;
 }
 
-export const InputController = ({ onChange, control, name, ...rest }: InputControllerProps) => {
+export const InputController = ({
+  onChange,
+  control,
+  name,
+  textFieldProps,
+}: InputControllerProps) => {
   return (
     <Controller
       name={name}
@@ -23,7 +28,7 @@ export const InputController = ({ onChange, control, name, ...rest }: InputContr
               field.onChange(e);
               onChange?.(e.target.value);
             }}
-            {...rest}
+            {...textFieldProps}
           />
           {Boolean(error) && (
             <Text color="red" size="1">

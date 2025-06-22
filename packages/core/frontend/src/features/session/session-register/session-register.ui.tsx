@@ -28,6 +28,7 @@ export const SessionRegister = () => {
 
   return (
     <SessionRoot
+      title="Регистрация"
       buttonGroup={
         <SessionGroupButton
           linkTo="/sign-in"
@@ -40,7 +41,7 @@ export const SessionRegister = () => {
       <InputController
         control={control}
         name="phone"
-        rest={{ type: "tel", placeholder: "Номер телефона" }}
+        textFieldProps={{ type: "tel", placeholder: "Номер телефона" }}
       />
     </SessionRoot>
   );

@@ -4,7 +4,12 @@ import { Controller, useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import { SessionGroupButton } from "../session-group-buttons/session-group-buttons.ui";
 import { SessionRoot } from "../session-root.ui";
-import { StyledPasswordField, StyledPasswordFieldsWrapper } from "../session.styled";
+import {
+  StyledPasswordField,
+  StyledPasswordFieldsWrapper,
+  StyledSessionDescription,
+} from "../session.styled";
+import { SessionConfirmPhoneHeader } from "./session-confirm-phone-header/session-confirm-phone-header";
 import { DEFAULT_CONFIRM_OTP_VALUES } from "./session-confirm-phone.constants";
 import { ConfirmOtpSchema } from "./session-confirm-phone.contract";
 import type { ConfirmOtpData } from "./session-confirm-phone.types";
@@ -28,7 +33,14 @@ export const SessionConfirmPhone = () => {
   });
 
   return (
-    <SessionRoot buttonGroup={<SessionGroupButton buttonText="Подтвердить" />} onSubmit={onSubmit}>
+    <SessionRoot
+      title={<SessionConfirmPhoneHeader />}
+      buttonGroup={<SessionGroupButton buttonText="Подтвердить" />}
+      onSubmit={onSubmit}
+    >
+      <StyledSessionDescription>
+        Мы отправили смс с кодом на номер {searchParams.get("phone")}
+      </StyledSessionDescription>
       <Controller
         name="code"
         control={control}

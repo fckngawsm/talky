@@ -1,5 +1,5 @@
-import { BasedButton } from "@/shared/ui/button/button.ui";
 import { BasedLink } from "@/shared/ui/link/link.ui";
+import { StyledSessionButton } from "../session.styled";
 import { StyledSessionGroupButton } from "./session-group-buttons.styled";
 
 interface SessionGroupButtonProps {
@@ -11,9 +11,9 @@ interface SessionGroupButtonProps {
 export const SessionGroupButton = ({ linkText, buttonText, linkTo }: SessionGroupButtonProps) => {
   return (
     <StyledSessionGroupButton>
-      <BasedButton buttonProps={{ size: "2", variant: "solid", radius: "medium" }}>
+      <StyledSessionButton buttonProps={{ size: "3", variant: "solid", radius: "medium" }}>
         {buttonText}
-      </BasedButton>
+      </StyledSessionButton>
       {linkText && linkTo && <BasedLink to={linkTo} linkText={linkText} />}
     </StyledSessionGroupButton>
   );
