@@ -7,6 +7,7 @@ interface InputControllerProps {
   name: string;
   onChange?: (value: string) => void;
   textFieldProps?: TextField.RootProps;
+  renderInput?: (field: any) => React.ReactNode;
 }
 
 export const InputController = ({
@@ -14,6 +15,7 @@ export const InputController = ({
   control,
   name,
   textFieldProps,
+  renderInput,
 }: InputControllerProps) => {
   return (
     <Controller
@@ -21,15 +23,25 @@ export const InputController = ({
       control={control}
       render={({ field, fieldState: { error } }) => (
         <Flex direction="column" gap="1">
-          <StyledRootTextFieldController
-            {...field}
-            size="3"
-            onChange={(e) => {
-              field.onChange(e);
-              onChange?.(e.target.value);
-            }}
-            {...textFieldProps}
-          />
+          {renderInput ? (
+            renderInput({
+              ...field,
+              onChange: (e: any) => {
+                field.onChange(e);
+                onChange?.(e?.target?.value || e);
+              },
+            })
+          ) : (
+            <StyledRootTextFieldController
+              {...field}
+              size="3"
+              onChange={(e) => {
+                field.onChange(e);
+                onChange?.(e.target.value);
+              }}
+              {...textFieldProps}
+            />
+          )}
           {Boolean(error) && (
             <Text color="red" size="1">
               {error?.message}
