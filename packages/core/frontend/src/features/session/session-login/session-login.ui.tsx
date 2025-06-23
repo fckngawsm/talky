@@ -1,4 +1,5 @@
 import { useTimer } from "@/shared/hooks/useTimer";
+import { StyledRootTextFieldController } from "@/shared/ui/input-controller/input-controller.styled";
 import { InputController } from "@/shared/ui/input-controller/input-controller.ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputMask } from "@react-input/mask";
@@ -39,12 +40,14 @@ export const SessionLogin = () => {
         name="phone"
         renderInput={({ value, onChange, onBlur, ref }) => (
           <InputMask
+            placeholder="+7"
             mask="+7 (___) ___-__-__"
             replacement={{ _: /\d/ }}
             value={value}
             onChange={onChange}
             onBlur={onBlur}
             ref={ref}
+            component={StyledRootTextFieldController}
           />
         )}
       />

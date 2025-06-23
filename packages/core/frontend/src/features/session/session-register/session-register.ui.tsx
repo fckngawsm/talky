@@ -1,5 +1,7 @@
+import { StyledRootTextFieldController } from "@/shared/ui/input-controller/input-controller.styled";
 import { InputController } from "@/shared/ui/input-controller/input-controller.ui";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { InputMask } from "@react-input/mask";
 import { useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { SessionGroupButton } from "../session-group-buttons/session-group-buttons.ui";
@@ -41,7 +43,18 @@ export const SessionRegister = () => {
       <InputController
         control={control}
         name="phone"
-        textFieldProps={{ type: "tel", placeholder: "Номер телефона" }}
+        renderInput={({ value, onChange, onBlur, ref }) => (
+          <InputMask
+            placeholder="+7"
+            mask="+7 (___) ___-__-__"
+            replacement={{ _: /\d/ }}
+            value={value}
+            onChange={onChange}
+            onBlur={onBlur}
+            ref={ref}
+            component={StyledRootTextFieldController}
+          />
+        )}
       />
     </SessionRoot>
   );
