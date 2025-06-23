@@ -1,4 +1,4 @@
-import { phoneRegex } from "@/entities/session/session.contants";
+import { phoneRegex } from "@/entities/session/session.constants";
 import { z } from "zod";
 
 export const LoginSchema = z.object({

@@ -9,7 +9,7 @@ interface SessionRootProps {
   children: ReactNode;
   title: ReactNode;
   buttonGroup?: ReactNode;
-  onSubmit: () => void;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export const SessionRoot = ({ onSubmit, children, title, buttonGroup }: SessionRootProps) => {

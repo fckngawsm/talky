@@ -1,8 +1,10 @@
 import { useTimer } from "@/shared/hooks/useTimer";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@radix-ui/themes";
 import { unstable_OneTimePasswordField as OneTimePasswordField } from "radix-ui";
 import { Controller, useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
+
 import { SessionGroupButton } from "../session-group-buttons/session-group-buttons.ui";
 import { SessionRoot } from "../session-root.ui";
 import {
@@ -11,31 +13,36 @@ import {
   StyledSessionDescription,
 } from "../session.styled";
 import { SessionConfirmPhoneHeader } from "./session-confirm-phone-header/session-confirm-phone-header";
+import { confirmOtp } from "./session-confirm-phone.api";
 import { DEFAULT_CONFIRM_OTP_VALUES } from "./session-confirm-phone.constants";
 import { ConfirmOtpSchema } from "./session-confirm-phone.contract";
 import type { ConfirmOtpData } from "./session-confirm-phone.types";
 
-import { Button } from "@radix-ui/themes";
+const CODE_LENGTH = 4;
 
 export const SessionConfirmPhone = () => {
   const [searchParams] = useSearchParams();
   const { secondsLeft, startTimer } = useTimer();
+  const phone = searchParams.get("phone");
 
-  const { handleSubmit, control } = useForm<ConfirmOtpData>({
+  const { handleSubmit, control, setError } = useForm<ConfirmOtpData>({
     mode: "onChange",
     defaultValues: DEFAULT_CONFIRM_OTP_VALUES,
     resolver: zodResolver(ConfirmOtpSchema),
   });
 
-  const onSubmit = handleSubmit((data) => {
-    const formattedData = { ...data, phone: searchParams.get("phone") };
-    console.log("Подтверждение кода", formattedData);
+  const onSubmit = handleSubmit(async (data) => {
+    console.log(data, "data");
+    if (!phone) return;
+    try {
+      await confirmOtp({ code: data.code, phone });
+    } catch (err) {
+      setError("code", { message: "Ошибка при отправки формы" });
+    }
   });
 
   const handleResendCode = () => {
-    const phone = searchParams.get("phone");
     if (phone) {
-      console.log("Повторная отправка кода для", phone);
       startTimer();
     }
   };
@@ -46,21 +53,20 @@ export const SessionConfirmPhone = () => {
       buttonGroup={<SessionGroupButton buttonText="Подтвердить" />}
       onSubmit={onSubmit}
     >
-      <StyledSessionDescription>
-        Мы отправили смс с кодом на номер {searchParams.get("phone")}
-      </StyledSessionDescription>
+      <StyledSessionDescription>Мы отправили смс с кодом на номер {phone}</StyledSessionDescription>
 
       <Controller
-        name="code"
         control={control}
-        render={({ field }) => (
-          <StyledPasswordFieldsWrapper onValueChange={field.onChange} value={field.value}>
-            <StyledPasswordField />
-            <StyledPasswordField />
-            <StyledPasswordField />
-            <StyledPasswordField />
-            <OneTimePasswordField.HiddenInput />
-          </StyledPasswordFieldsWrapper>
+        name="code"
+        render={({ field: { value, onChange } }) => (
+          <OneTimePasswordField.Root value={value} onValueChange={onChange} autoSubmit={false}>
+            <StyledPasswordFieldsWrapper>
+              {Array.from({ length: CODE_LENGTH }).map((_, i) => (
+                <StyledPasswordField as={OneTimePasswordField.Input} key={i} />
+              ))}
+              <OneTimePasswordField.HiddenInput name="code" />
+            </StyledPasswordFieldsWrapper>
+          </OneTimePasswordField.Root>
         )}
       />
 

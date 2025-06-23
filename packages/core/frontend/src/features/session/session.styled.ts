@@ -1,6 +1,5 @@
 import { BasedButton } from "@/shared/ui/button/button.ui";
 import { Box, Text } from "@radix-ui/themes";
-import { unstable_OneTimePasswordField as OneTimePasswordField } from "radix-ui";
 import styled from "styled-components";
 
 export const StyledSessionFormTitle = styled(Text)`
@@ -34,12 +33,12 @@ export const StyledSessionForm = styled.form`
   width: 100%;
 `;
 
-export const StyledPasswordFieldsWrapper = styled(OneTimePasswordField.Root)`
+export const StyledPasswordFieldsWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-export const StyledPasswordField = styled(OneTimePasswordField.Input)`
+export const StyledPasswordField = styled.input`
   width: 3rem;
   height: 3rem;
   margin: 0 0.25rem;
