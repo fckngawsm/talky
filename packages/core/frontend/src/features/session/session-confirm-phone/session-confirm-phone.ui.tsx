@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@radix-ui/themes";
 import { unstable_OneTimePasswordField as OneTimePasswordField } from "radix-ui";
 import { Controller, useForm } from "react-hook-form";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { SessionGroupButton } from "../session-group-buttons/session-group-buttons.ui";
 import { SessionRoot } from "../session-root.ui";
@@ -24,7 +24,7 @@ export const SessionConfirmPhone = () => {
   const [searchParams] = useSearchParams();
   const { secondsLeft, startTimer } = useTimer();
   const phone = searchParams.get("phone");
-
+  const navigate = useNavigate();
   const { handleSubmit, control, setError } = useForm<ConfirmOtpData>({
     mode: "onChange",
     defaultValues: DEFAULT_CONFIRM_OTP_VALUES,
@@ -32,10 +32,10 @@ export const SessionConfirmPhone = () => {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data, "data");
     if (!phone) return;
     try {
       await confirmOtp({ code: data.code, phone });
+      navigate("/chat");
     } catch (err) {
       setError("code", { message: "Ошибка при отправки формы" });
     }
