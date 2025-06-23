@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsString } from "class-validator";
 import { IsRussianPhone } from "src/common/decorators/is-russian-phone.decorator";
 
 export class SignDTO {
@@ -8,8 +8,9 @@ export class SignDTO {
 }
 
 export class ConfirmOtpDTO {
-  @IsNumber()
-  userId: number;
+  @IsString()
+  @IsRussianPhone()
+  phone: string;
 
   @IsString()
   code: string;

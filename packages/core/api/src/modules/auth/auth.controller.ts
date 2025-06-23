@@ -19,9 +19,9 @@ export class AuthController {
 
   @Post("confirm-otp")
   async confirmOtp(@Body() body: ConfirmOtpDTO, @Res({ passthrough: true }) res: Response) {
-    const { code, userId } = body;
+    const { code, phone } = body;
 
-    const { token } = await this.authService.confirmOtp({ code, userId });
+    const { token } = await this.authService.confirmOtpAndGetToken({ code, phone });
 
     res.cookie("auth_token", token, {
       httpOnly: true,
