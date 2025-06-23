@@ -22,8 +22,6 @@ export class AuthService {
       ),
     );
 
-    console.log(status, "status");
-
     if (status !== "ok") {
       throw new RpcException("Произошла ошибка при отправки кода");
     }
@@ -36,6 +34,5 @@ export class AuthService {
         { userId: data.userId, code: data.code },
       ),
     );
-    console.log(isSuccess, "isSuccess");
   }
 }
