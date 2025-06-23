@@ -34,7 +34,7 @@ export class AuthController {
     return { success: true };
   }
 
-  @Post("refresh-confirm-otp")
+  @Post("refresh-otp")
   async refreshOtp(@Body() body: ConfirmOtpDTO, @Res({ passthrough: true }) res: Response) {
     const { code, phone } = body;
 
