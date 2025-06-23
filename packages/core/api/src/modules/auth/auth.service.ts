@@ -13,7 +13,15 @@ import { lastValueFrom } from "rxjs";
 @Injectable()
 export class AuthService {
   constructor(@Inject("NATS_SERVICE") private readonly natsClient: ClientProxy) {}
-  async signIn(phone: string) {}
+  async signIn(phone: string) {
+    const { status } = await lastValueFrom(
+      this.natsClient.send<AuthSignResponseContract, AuthSignRequestContract>(
+        AUTH_PATTERNS.COMMAND_AUTH_LOGIN,
+        { phone },
+      ),
+    );
+  }
+
   async signUp(phone: string) {
     const { status } = await lastValueFrom(
       this.natsClient.send<AuthSignResponseContract, AuthSignRequestContract>(

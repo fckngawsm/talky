@@ -2,6 +2,7 @@ import { Controller, Inject } from "@nestjs/common";
 import { ClientProxy, MessagePattern, Payload, RpcException } from "@nestjs/microservices";
 import {
   AUTH_PATTERNS,
+  AuthSignResponseContract,
   USER_PATTERNS,
   UserCreateRequestContract,
   UserCreateResponseContract,
@@ -16,10 +17,7 @@ export class AuthController {
   constructor(@Inject("NATS_SERVICE") private readonly natsClient: ClientProxy) {}
 
   @MessagePattern(AUTH_PATTERNS.COMMAND_AUTH_REGISTER)
-  async handleRegister(
-    @Payload() data: { phone: string },
-  ): Promise<{ status: string; message?: string }> {
-    console.log(data, "data");
+  async handleRegister(@Payload() data: { phone: string }): Promise<AuthSignResponseContract> {
     const { phone } = data;
 
     const { user } = await lastValueFrom(
@@ -39,9 +37,7 @@ export class AuthController {
         { phone },
       ),
     );
-    console.log("Emitting OTP event", USER_PATTERNS.COMMAND_GENERATE_USER_OTP_CODE, {
-      userId: newUser?.id,
-    });
+
     this.natsClient.emit<UserGetOtpCodeRequestContract>(
       USER_PATTERNS.COMMAND_GENERATE_USER_OTP_CODE,
       {
@@ -50,5 +46,26 @@ export class AuthController {
     );
 
     return { status: "ok", message: "Пользователь успешно зарегистрирован, OTP отправлен" };
+  }
+
+  @MessagePattern(AUTH_PATTERNS.COMMAND_AUTH_LOGIN)
+  async handleLogin(@Payload() data: { phone: string }): Promise<AuthSignResponseContract> {
+    const { phone } = data;
+
+    const { user: newUser } = await lastValueFrom(
+      this.natsClient.send<UserCreateResponseContract, UserCreateRequestContract>(
+        USER_PATTERNS.QUERY_GET_USER_BY_PHONE,
+        { phone },
+      ),
+    );
+
+    this.natsClient.emit<UserGetOtpCodeRequestContract>(
+      USER_PATTERNS.COMMAND_GENERATE_USER_OTP_CODE,
+      {
+        userId: newUser?.id,
+      },
+    );
+
+    return { status: "ok", message: "OTP отправлен" };
   }
 }
