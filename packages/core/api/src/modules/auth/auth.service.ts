@@ -1,18 +1,22 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { ClientProxy, RpcException } from "@nestjs/microservices";
+import { JwtService } from "@nestjs/jwt";
+import { ClientProxy } from "@nestjs/microservices";
 import {
   AUTH_PATTERNS,
+  AuthConfirmOtpRequestContract,
+  AuthConfirmOtpResponseContract,
   AuthSignRequestContract,
   AuthSignResponseContract,
   USER_PATTERNS,
-  UserConfirmOtpCodeRequestContract,
-  UserConfirmOtpCodeResponseContract,
 } from "@talky/nats-module";
 import { lastValueFrom } from "rxjs";
 
 @Injectable()
 export class AuthService {
-  constructor(@Inject("NATS_SERVICE") private readonly natsClient: ClientProxy) {}
+  constructor(
+    @Inject("NATS_SERVICE") private readonly natsClient: ClientProxy,
+    private readonly jwtService: JwtService,
+  ) {}
   async signIn(phone: string) {
     const { status } = await lastValueFrom(
       this.natsClient.send<AuthSignResponseContract, AuthSignRequestContract>(
@@ -20,6 +24,10 @@ export class AuthService {
         { phone },
       ),
     );
+
+    if (status !== "ok") {
+      throw new Error("Произошла ошибка при отправки кода");
+    }
   }
 
   async signUp(phone: string) {
@@ -31,16 +39,28 @@ export class AuthService {
     );
 
     if (status !== "ok") {
-      throw new RpcException("Произошла ошибка при отправки кода");
+      throw new Error("Произошла ошибка при отправки кода");
     }
   }
 
   async confirmOtp(data: { code: string; userId: number }) {
     const { isSuccess } = await lastValueFrom(
-      this.natsClient.send<UserConfirmOtpCodeResponseContract, UserConfirmOtpCodeRequestContract>(
+      this.natsClient.send<AuthConfirmOtpResponseContract, AuthConfirmOtpRequestContract>(
         USER_PATTERNS.COMMAND_CONFIRM_USER_OTP_CODE,
         { userId: data.userId, code: data.code },
       ),
     );
+
+    if (!isSuccess) throw new Error("Произошла ошибка при подтверждении кода");
+
+    const token = this.jwtService.sign(
+      { sub: data.userId },
+      {
+        expiresIn: "1d",
+        secret: process.env.JWT_SECRET || "secret",
+      },
+    );
+
+    return { token };
   }
 }

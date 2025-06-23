@@ -22,7 +22,3 @@ export class UserConfirmOtpCodeRequestContract {
   userId: number;
   code: string;
 }
-
-export class UserConfirmOtpCodeResponseContract {
-  isSuccess: boolean;
-}

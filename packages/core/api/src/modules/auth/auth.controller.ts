@@ -1,4 +1,5 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Post, Res } from "@nestjs/common";
+import { Response } from "express";
 import { AuthService } from "./auth.service";
 import { ConfirmOtpDTO, SignDTO } from "./dto/sign.dto";
 
@@ -17,7 +18,19 @@ export class AuthController {
   }
 
   @Post("confirm-otp")
-  async ConfirmItp(@Body() { userId, code }: ConfirmOtpDTO) {
-    return await this.authService.confirmOtp({ userId, code });
+  async confirmOtp(@Body() body: ConfirmOtpDTO, @Res({ passthrough: true }) res: Response) {
+    const { code, userId } = body;
+
+    const { token } = await this.authService.confirmOtp({ code, userId });
+
+    res.cookie("auth_token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      maxAge: 86400000,
+      path: "/",
+    });
+
+    return { success: true };
   }
 }
