@@ -9,6 +9,7 @@ export class UsersController {
   @Get("me")
   @UseGuards(CookieAuthGuard)
   getCurrentUser(@Req() req) {
+    console.log(req, "req");
     return req.user;
   }
 }

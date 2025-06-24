@@ -7,10 +7,8 @@ export class CookieAuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-
     const token = request.cookies["auth_token"];
     if (!token) return false;
-
     const user = await this.authService.validateToken(token);
     if (!user) return false;
 

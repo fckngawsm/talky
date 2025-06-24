@@ -1,8 +1,8 @@
 import { NestFactory } from "@nestjs/core";
 import { Transport } from "@nestjs/microservices";
+import * as cookieParser from "cookie-parser";
 import { AppModule } from "./app.module";
 import { GlobalHttpExceptionFilter } from "./common/filters/global-http-exception.filter";
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalFilters(new GlobalHttpExceptionFilter());
@@ -11,6 +11,8 @@ async function bootstrap() {
     origin: "http://localhost:3000",
     credentials: true,
   });
+  app.use(cookieParser());
+
   app.connectMicroservice({
     transport: Transport.NATS,
     options: {
