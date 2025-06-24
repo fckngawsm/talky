@@ -6,7 +6,11 @@ import { GlobalHttpExceptionFilter } from "./common/filters/global-http-exceptio
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalFilters(new GlobalHttpExceptionFilter());
-  app.enableCors();
+  app.enableCors({
+    // TODO: добавить в env
+    origin: "http://localhost:3000",
+    credentials: true,
+  });
   app.connectMicroservice({
     transport: Transport.NATS,
     options: {
