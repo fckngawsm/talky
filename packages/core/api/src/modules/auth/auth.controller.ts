@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Res } from "@nestjs/common";
 import { Response } from "express";
 import { AuthService } from "./auth.service";
-import { ConfirmOtpDTO, SignDTO } from "./dto/sign.dto";
+import { ConfirmOtpDTO, RefreshOtpCodeDTO, SignDTO } from "./dto/sign.dto";
 
 @Controller("auth")
 export class AuthController {
@@ -35,9 +35,9 @@ export class AuthController {
   }
 
   @Post("refresh-otp")
-  async refreshOtp(@Body() body: ConfirmOtpDTO, @Res({ passthrough: true }) res: Response) {
-    const { code, phone } = body;
-
+  async refreshOtp(@Body() body: RefreshOtpCodeDTO, @Res({ passthrough: true }) res: Response) {
+    const { phone } = body;
+    await this.authService.refreshOtpCode(phone);
     return { success: true };
   }
 }

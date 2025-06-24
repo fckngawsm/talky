@@ -10,6 +10,7 @@ import {
   USER_PATTERNS,
   UserGetByPhoneRequestContract,
   UserGetByPhoneResponseContract,
+  UserGetOtpCodeRequestContract,
 } from "@talky/nats-module";
 import { lastValueFrom } from "rxjs";
 
@@ -43,6 +44,22 @@ export class AuthService {
     if (status !== "ok") {
       throw new Error("Произошла ошибка при отправки кода");
     }
+  }
+
+  async refreshOtpCode(phone: string) {
+    const { user } = await lastValueFrom(
+      this.natsClient.send<UserGetByPhoneResponseContract, UserGetByPhoneRequestContract>(
+        USER_PATTERNS.QUERY_GET_USER_BY_PHONE,
+        { phone },
+      ),
+    );
+
+    this.natsClient.emit<UserGetOtpCodeRequestContract>(
+      USER_PATTERNS.COMMAND_GENERATE_USER_OTP_CODE,
+      {
+        userId: user?.id,
+      },
+    );
   }
 
   async confirmOtpAndGetToken(data: { code: string; phone: string }) {

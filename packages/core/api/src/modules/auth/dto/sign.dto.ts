@@ -15,3 +15,9 @@ export class ConfirmOtpDTO {
   @IsString()
   code: string;
 }
+
+export class RefreshOtpCodeDTO {
+  @IsString()
+  @IsRussianPhone()
+  phone: string;
+}
