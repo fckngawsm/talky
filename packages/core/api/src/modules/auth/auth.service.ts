@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
+import { JwtService, JwtVerifyOptions } from "@nestjs/jwt";
 import { ClientProxy } from "@nestjs/microservices";
 import {
   AUTH_PATTERNS,
@@ -20,6 +20,23 @@ export class AuthService {
     @Inject("NATS_SERVICE") private readonly natsClient: ClientProxy,
     private readonly jwtService: JwtService,
   ) {}
+  async validateToken(token: string) {
+    try {
+      const payload = this.jwtService.verify(
+        token,
+        process.env.JWT_SECRET as JwtVerifyOptions,
+      ) as any;
+      console.log(payload, "payload");
+      return {
+        id: payload.sub,
+        email: payload.email,
+        roles: payload.roles,
+      };
+    } catch (e) {
+      return null;
+    }
+  }
+
   async signIn(phone: string) {
     const { status } = await lastValueFrom(
       this.natsClient.send<AuthSignResponseContract, AuthSignRequestContract>(
