@@ -13,7 +13,7 @@ import {
   StyledSessionDescription,
 } from "../session.styled";
 import { SessionConfirmPhoneHeader } from "./session-confirm-phone-header/session-confirm-phone-header";
-import { confirmOtp } from "./session-confirm-phone.api";
+import { confirmOtp, refreshOtp } from "./session-confirm-phone.api";
 import { DEFAULT_CONFIRM_OTP_VALUES } from "./session-confirm-phone.constants";
 import { ConfirmOtpSchema } from "./session-confirm-phone.contract";
 import type { ConfirmOtpData } from "./session-confirm-phone.types";
@@ -41,8 +41,9 @@ export const SessionConfirmPhone = () => {
     }
   });
 
-  const handleResendCode = () => {
+  const handleResendCode = async () => {
     if (phone) {
+      await refreshOtp();
       startTimer();
     }
   };
