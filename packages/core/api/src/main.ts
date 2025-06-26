@@ -7,8 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalFilters(new GlobalHttpExceptionFilter());
   app.enableCors({
-    // TODO: добавить в env
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_URL,
     credentials: true,
   });
   app.use(cookieParser());
