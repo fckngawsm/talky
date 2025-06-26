@@ -26,13 +26,8 @@ export class AuthService {
         token,
         process.env.JWT_SECRET as JwtVerifyOptions,
       ) as any;
-      // payload === {id:}
-      console.log(payload, "payload");
-      return {
-        id: payload.sub,
-        email: payload.email,
-        roles: payload.roles,
-      };
+
+      return payload;
     } catch (e) {
       return null;
     }
@@ -98,7 +93,7 @@ export class AuthService {
     if (!isSuccess) throw new Error("Произошла ошибка при подтверждении кода");
 
     const token = this.jwtService.sign(
-      { sub: user.id },
+      { user },
       {
         expiresIn: "1d",
         secret: process.env.JWT_SECRET || "secret",
