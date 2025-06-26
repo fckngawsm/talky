@@ -1,16 +1,19 @@
 import { Module } from "@nestjs/common";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
 import { NatsTransportModule } from "@talky/nats-module";
 import { AuthController } from "./auth.controller";
 @Module({
   imports: [
-    JwtModule.register({
-      secret: "ACCESS_SECRET_KEY",
-      signOptions: { expiresIn: "15m" },
+    ConfigModule.forRoot({
+      envFilePath: ".development.env",
+      isGlobal: true,
     }),
-    JwtModule.register({
-      secret: "REFRESH_SECRET_KEY",
-      signOptions: { expiresIn: "7d" },
+    JwtModule.registerAsync({
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get("ACCESS_SECRET_KEY"),
+        signOptions: { expiresIn: "15m" },
+      }),
     }),
     NatsTransportModule,
   ],

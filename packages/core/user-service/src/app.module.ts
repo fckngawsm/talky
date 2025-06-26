@@ -1,19 +1,26 @@
 import { Module } from "@nestjs/common";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { NatsTransportModule } from "@talky/nats-module";
 import { UsersOtpModule } from "./modules/users-otp/users-otp.module";
 import { UsersModule } from "./modules/users/users.module";
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: "mysql",
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT, 10),
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      entities: [__dirname + "/**/*.entity{.ts,.js}"],
-      synchronize: process.env.NODE_ENV === "development",
+    ConfigModule.forRoot({
+      envFilePath: ".development.env",
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      useFactory: async (configService: ConfigService) => ({
+        type: "mysql",
+        host: configService.get("DB_HOST"),
+        port: configService.get("DB_PORT"),
+        username: configService.get("DB_USER"),
+        password: configService.get("DB_PASSWORD"),
+        database: configService.get("DB_NAME"),
+        entities: [__dirname + "/**/*.entity{.ts,.js}"],
+        synchronize: configService.get('NODE_ENV === "development"'),
+      }),
     }),
     NatsTransportModule,
     UsersModule,

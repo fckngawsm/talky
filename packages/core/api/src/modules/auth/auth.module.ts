@@ -1,4 +1,5 @@
 import { Module } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
 import { NatsTransportModule } from "@talky/nats-module";
 import { AuthController } from "./auth.controller";
@@ -7,9 +8,12 @@ import { AuthService } from "./auth.service";
 @Module({
   imports: [
     NatsTransportModule,
-    JwtModule.register({
-      secret: process.env.JWT_SECRET || "secret",
-      signOptions: { expiresIn: "1d" },
+    JwtModule.registerAsync({
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>("JWT_SECRET", "secret"),
+        signOptions: { expiresIn: "1d" },
+      }),
+      inject: [ConfigService],
     }),
   ],
   controllers: [AuthController],
