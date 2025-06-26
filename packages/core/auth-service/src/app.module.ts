@@ -14,6 +14,7 @@ import { AuthController } from "./auth.controller";
         secret: configService.get("ACCESS_SECRET_KEY"),
         signOptions: { expiresIn: "15m" },
       }),
+      inject: [ConfigService],
     }),
     NatsTransportModule,
   ],
