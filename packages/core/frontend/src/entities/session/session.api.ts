@@ -1,3 +1,5 @@
 import { api } from "@/shared/libs/axios";
 
-export const getCurrentUser = () => api.get("/users/me");
+type GetCurrentUser = () => Promise<any>;
+
+export const getCurrentUser: GetCurrentUser = () => api.get("/users/me");
