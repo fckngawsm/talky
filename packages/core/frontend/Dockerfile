@@ -9,5 +9,3 @@ COPY packages/shared/configs/package.json ./packages/shared/configs/
 RUN yarn install --frozen-lockfile
 
 CMD ["yarn", "dev"]
-
-3000
