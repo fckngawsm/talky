@@ -17,5 +17,3 @@ COPY packages/core/api/ ./packages/core/api/
 RUN cd packages/shared/nats-module && yarn install
 
 CMD ["yarn", "dev"]
-
-EXPOSE 3003

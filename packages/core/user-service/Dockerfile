@@ -18,4 +18,3 @@ RUN cd packages/core/user-service && yarn build
 
 CMD ["yarn", "dev"]
 
-EXPOSE 3003

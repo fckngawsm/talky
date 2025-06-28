@@ -10,4 +10,4 @@ RUN yarn install --frozen-lockfile
 
 CMD ["yarn", "dev"]
 
-EXPOSE 3000
+3000

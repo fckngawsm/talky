@@ -59,6 +59,26 @@ services:
       - "3004:3004"
     networks:
       - my-network
+  chat-service:
+    container_name: chat-service
+    build:
+      context: .
+      dockerfile: packages/core/chat-service/Dockerfile
+    volumes:
+      - ./packages/core/chat-service:/app/packages/core/chat-service
+      - ./packages/shared:/app/packages/shared
+      - /app/node_modules
+    depends_on:
+      mysql:
+        condition: service_healthy
+      nats:
+        condition: service_started
+    env_file:
+      - ./packages/core/chat-service/.development.env
+    ports:
+      - "3004:3004"
+    networks:
+      - my-network    
   frontend:
     container_name: frontend
     build:
