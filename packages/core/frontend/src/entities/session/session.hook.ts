@@ -1,4 +1,4 @@
-import { identifyUser } from "@/providers/logger/highlight-run";
+// import { identifyUser } from "@/providers/logger/highlight-run";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -18,14 +18,16 @@ export const useAuth = () => {
   });
 
   useEffect(() => {
+    console.log(user, "user");
     if (!isLoading) {
       if (!user) {
+        console.log("now not user");
         navigate("/sign-in", { replace: true });
       } else {
-        identifyUser(user.id, {
-          phone: user.phone,
-          login: user.login,
-        });
+        // identifyUser(user.id, {
+        //   phone: user.phone,
+        //   login: user.login,
+        // });
       }
     }
   }, [isLoading, user, navigate]);

@@ -10,6 +10,6 @@ export class UsersController {
   @UseGuards(CookieAuthGuard)
   getCurrentUser(@Req() req) {
     console.log(req, "req");
-    return req.user;
+    return req.user.user;
   }
 }

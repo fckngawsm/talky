@@ -19,7 +19,7 @@ import { UsersModule } from "./modules/users/users.module";
         password: configService.get("DB_PASSWORD"),
         database: configService.get("DB_NAME"),
         entities: [__dirname + "/**/*.entity{.ts,.js}"],
-        synchronize: configService.get('NODE_ENV === "development"'),
+        synchronize: configService.get("NODE_ENV") === "development",
       }),
       inject: [ConfigService],
     }),
