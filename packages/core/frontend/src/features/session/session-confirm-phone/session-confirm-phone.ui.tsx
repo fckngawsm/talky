@@ -5,6 +5,7 @@ import { unstable_OneTimePasswordField as OneTimePasswordField } from "radix-ui"
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
+import { login } from "@/entities/session/session.api";
 import { SessionGroupButton } from "../session-group-buttons/session-group-buttons.ui";
 import { SessionRoot } from "../session-root.ui";
 import {
@@ -35,6 +36,7 @@ export const SessionConfirmPhone = () => {
     if (!phone) return;
     try {
       await confirmOtp({ code: data.code, phone });
+      await login(phone);
       navigate("/chat");
     } catch (err) {
       setError("code", { message: "Ошибка при отправки формы" });

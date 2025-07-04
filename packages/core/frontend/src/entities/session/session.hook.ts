@@ -18,16 +18,12 @@ export const useAuth = () => {
   });
 
   useEffect(() => {
-    console.log(user, "user");
     if (!isLoading) {
       if (!user) {
         console.log("now not user");
         navigate("/sign-in", { replace: true });
       } else {
-        // identifyUser(user.id, {
-        //   phone: user.phone,
-        //   login: user.login,
-        // });
+        navigate("/");
       }
     }
   }, [isLoading, user, navigate]);
