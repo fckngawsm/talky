@@ -4,7 +4,6 @@ WORKDIR /app
 
 COPY package.json lerna.json yarn.lock ./
 COPY packages/core/frontend/package.json ./packages/core/frontend/
-COPY packages/shared/configs/package.json ./packages/shared/configs/
 
 RUN yarn install --frozen-lockfile
 
