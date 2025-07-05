@@ -101,7 +101,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     env_file:
-      - ./packages/core/dbs/my-sql/.development.env
+      - .env
     ports:
       - "3306:3306"
     healthcheck:
@@ -116,7 +116,7 @@ services:
     ports:
        - 5434:5432
     env_file:
-      - ./packages/core/dbs/postgres/.development.env
+      - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped  
