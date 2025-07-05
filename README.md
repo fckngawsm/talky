@@ -34,8 +34,7 @@ Lerna версии 7 и выше **удалила** команду `lerna add`. 
 
 ## Очистить volumes
 
-docker system prune -af
-docker volume prune -af
+docker compose down -v
 
 ## Поднять проект
 
