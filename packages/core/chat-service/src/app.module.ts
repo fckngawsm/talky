@@ -1,8 +1,10 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { ChatModule } from "./modules/chat/chat.module";
 @Module({
   imports: [
+    ChatModule,
     ConfigModule.forRoot({
       envFilePath: ".development.env",
       isGlobal: true,
