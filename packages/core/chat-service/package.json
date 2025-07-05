@@ -27,7 +27,8 @@
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "@talky/nats-module": "0.0.0",
-    "typeorm": "^0.3.24"
+    "typeorm": "^0.3.24",
+    "@nestjs/config": "^4.0.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
