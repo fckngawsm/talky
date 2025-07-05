@@ -69,7 +69,7 @@ services:
       - ./packages/shared:/app/packages/shared
       - /app/node_modules
     depends_on:
-      mysql:
+      postgres:
         condition: service_healthy
       nats:
         condition: service_started
