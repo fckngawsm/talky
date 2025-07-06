@@ -15,7 +15,7 @@ export class SocketService {
 
   connect(userId: number) {
     if (!this.#socket) {
-      this.#socket = io("http://localhost:3000", {
+      this.#socket = io("http://localhost:3004", {
         query: { userId },
         transports: ["websocket"],
         autoConnect: true,

@@ -7,6 +7,8 @@ export const useSockets = () => {
   const socketService = SocketService.getInstance;
 
   useEffect(() => {
-    socketService.connect(currentUser.id);
-  }, []);
+    if (currentUser.id) socketService.connect(currentUser.id);
+
+    return () => socketService.disconnect();
+  }, [currentUser]);
 };

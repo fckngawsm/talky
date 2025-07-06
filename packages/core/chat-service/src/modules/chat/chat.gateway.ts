@@ -21,7 +21,8 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
   }
 
   handleConnection(client: Socket) {
-    console.log("✅ Client connected:", client.id);
+    const userId = client.handshake.query.userId;
+    console.log("✅ Client connected:", userId);
   }
 
   handleDisconnect(client: Socket) {
