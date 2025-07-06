@@ -37,6 +37,7 @@ export const SessionConfirmPhone = () => {
     try {
       await confirmOtp({ code: data.code, phone });
       await login(phone);
+
       navigate("/chat");
     } catch (err) {
       setError("code", { message: "Ошибка при отправки формы" });

@@ -1,7 +1,9 @@
 import { api } from "@/shared/libs/axios";
+import type { User } from "@/shared/types/User";
 
-type GetCurrentUser = () => Promise<any>;
+type GetCurrentUser = () => Promise<User>;
+type Login = (phone: string) => Promise<void>;
 
 export const getCurrentUser: GetCurrentUser = () => api.get("/users/me");
 
-export const login = (phone: string) => api.post("auth/sign-in", { phone });
+export const login: Login = (phone) => api.post("auth/sign-in", { phone });

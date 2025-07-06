@@ -13,7 +13,7 @@ export class SocketService {
     return SocketService.#instance;
   }
 
-  connect(userId: string) {
+  connect(userId: number) {
     if (!this.#socket) {
       this.#socket = io("http://localhost:3000", {
         query: { userId },

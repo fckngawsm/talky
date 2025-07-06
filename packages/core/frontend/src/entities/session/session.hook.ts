@@ -1,4 +1,5 @@
 // import { identifyUser } from "@/providers/logger/highlight-run";
+import { useCurrentUser } from "@/providers/store/user.store";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +7,7 @@ import { getCurrentUser } from "./session.api";
 
 export const useAuth = () => {
   const navigate = useNavigate();
+  const { setUser } = useCurrentUser();
 
   const {
     data: user,
@@ -19,10 +21,10 @@ export const useAuth = () => {
 
   useEffect(() => {
     if (!isLoading) {
-      if (!user) {
-        console.log("now not user");
+      if (!user?.id) {
         navigate("/sign-in", { replace: true });
       } else {
+        setUser(user);
         navigate("/");
       }
     }
