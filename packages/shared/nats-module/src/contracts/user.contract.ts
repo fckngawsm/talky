@@ -22,8 +22,7 @@ export class UserConfirmOtpCodeRequestContract {
 }
 // find
 export class UserFindByDataRequestContract {
-  login?: string;
-  phone?: string;
+  searchValue: string;
 }
 
 export class UserFindByDataResponseContract {

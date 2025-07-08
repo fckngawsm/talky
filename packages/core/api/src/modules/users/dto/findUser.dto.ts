@@ -1,11 +1,6 @@
-import { IsOptional, IsString } from "class-validator";
-import { IsRussianPhone } from "src/common/decorators/is-russian-phone.decorator";
+import { IsString } from "class-validator";
 
 export class FindUserDto {
   @IsString()
-  @IsOptional()
-  login?: string;
-  @IsRussianPhone()
-  @IsOptional()
-  phone?: string;
+  searchValue: string;
 }

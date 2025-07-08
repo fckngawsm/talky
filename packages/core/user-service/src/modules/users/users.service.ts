@@ -27,11 +27,11 @@ export class UsersService {
     return user;
   }
 
-  async findUser({ login, phone }: UserFindByDataRequestContract): Promise<User | null> {
+  async findUser({ searchValue }: UserFindByDataRequestContract): Promise<User | null> {
     const foundedUser = await this.userRepository.findOne({
       where: {
-        login,
-        phone,
+        login: searchValue,
+        phone: searchValue,
       },
     });
 

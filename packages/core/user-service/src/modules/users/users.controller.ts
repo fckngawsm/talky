@@ -41,9 +41,9 @@ export class UsersController {
   async findByData(
     @Payload() data: UserFindByDataRequestContract,
   ): Promise<UserFindByDataResponseContract> {
-    const { login, phone } = data;
+    const { searchValue } = data;
 
-    const user = await this.usersService.findUser({ login, phone });
+    const user = await this.usersService.findUser({ searchValue });
 
     return { user };
   }

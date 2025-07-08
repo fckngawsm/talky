@@ -14,7 +14,7 @@ export class UsersService {
     const { user } = await lastValueFrom(
       this.natsClient.send<UserFindByDataResponseContract, UserFindByDataRequestContract>(
         USER_PATTERNS.QUERY_GET_USER_BY_DATA,
-        { phone: data?.phone, login: data?.login },
+        { searchValue: data.searchValue },
       ),
     );
 
