@@ -11,24 +11,18 @@ import {
   StyledChatInfoWrapper,
 } from "./chat-dialog-item.styled";
 
-interface ChatDialogItemProps extends Dialog {
+const MOCK = {};
+
+interface ChatDialogItemProps {
   onSelectChat: () => void;
 }
 
-export const ChatDialogItem = ({
-  id,
-  avatarAlt,
-  avatarUrl,
-  userName,
-  lastMessage,
-  unreadMessageCount,
-  lastMessageTime,
-  onSelectChat,
-}: ChatDialogItemProps) => {
-  const { selectedChat } = useChat();
+export const ChatDialogItem = ({ onSelectChat }: ChatDialogItemProps) => {
+  const { selectedChatId } = useChat();
+  const { id, avatarAlt, avatarUrl, userName, lastMessage, lastMessageTime, unreadMessageCount } =
+    MOCK as Dialog;
 
-  const isChatSelected = selectedChat?.id === id;
-
+  const isChatSelected = selectedChatId === id;
   return (
     <StyledChatDialogItemWrapper $isSelected={isChatSelected} onClick={onSelectChat}>
       <BasedAvatar src={avatarUrl} alt={avatarAlt} />
