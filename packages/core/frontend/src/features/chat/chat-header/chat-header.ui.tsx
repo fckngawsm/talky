@@ -1,41 +1,21 @@
-import { useDebounce } from "@/shared/hooks/useDebounce";
-import { InputController } from "@/shared/ui/input-controller/input-controller.ui";
 import { BasedLink } from "@/shared/ui/link/link.ui";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
-import { useEffect } from "react";
-import { useForm, useWatch } from "react-hook-form";
-import { ChatSearchDefaultValue } from "./chat-header.constants";
-import { SearchChatSchema } from "./chat-header.contract";
+
+import { StyledRootTextFieldController } from "@/shared/ui/input-controller/input-controller.styled";
+import { useState, type ChangeEvent } from "react";
 import { StyledChatHeader } from "./chat-header.styled";
-import type { ChatSearch } from "./chat-header.types";
 
 export const ChatHeader = () => {
-  const { handleSubmit, control } = useForm<ChatSearch>({
-    mode: "onChange",
-    defaultValues: ChatSearchDefaultValue,
-    resolver: zodResolver(SearchChatSchema),
-  });
+  const [value, setValue] = useState("");
 
-  const searchValue = useWatch({
-    control,
-    name: "search",
-    defaultValue: "",
-  });
-
-  const debouncedSearchValue = useDebounce({
-    value: searchValue,
-  });
-
-  useEffect(() => {
-    if (debouncedSearchValue.trim()) {
-    }
-  });
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
 
   return (
     <StyledChatHeader>
       <BasedLink to="/profile" icon={<ArrowRightIcon cursor="pointer" />} linkText="Профиль" />
-      <InputController name="search" control={control} rest={{ placeholder: "Поиск" }} />
+      <StyledRootTextFieldController size="3" onChange={onChange} placeholder="Найти контакт" />
     </StyledChatHeader>
   );
 };
