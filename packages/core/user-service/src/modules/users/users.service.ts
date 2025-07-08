@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { UserFindByDataRequestContract } from "@talky/nats-module";
 import { Repository } from "typeorm";
 import { User } from "./users.entity";
 
@@ -24,5 +25,18 @@ export class UsersService {
 
     await this.userRepository.save(user);
     return user;
+  }
+
+  async findUser({ login, phone }: UserFindByDataRequestContract): Promise<User | null> {
+    const foundedUser = await this.userRepository.findOne({
+      where: {
+        login,
+        phone,
+      },
+    });
+
+    if (!foundedUser) return null;
+
+    return foundedUser;
   }
 }

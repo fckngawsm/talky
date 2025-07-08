@@ -4,6 +4,8 @@ import {
   USER_PATTERNS,
   UserCreateRequestContract,
   UserCreateResponseContract,
+  UserFindByDataRequestContract,
+  UserFindByDataResponseContract,
   UserGetByPhoneRequestContract,
   UserGetByPhoneResponseContract,
 } from "@talky/nats-module";
@@ -31,6 +33,17 @@ export class UsersController {
     const { phone } = data;
 
     const user = await this.usersService.createUser(phone);
+
+    return { user };
+  }
+
+  @MessagePattern(USER_PATTERNS.QUERY_GET_USER_BY_DATA)
+  async findByData(
+    @Payload() data: UserFindByDataRequestContract,
+  ): Promise<UserFindByDataResponseContract> {
+    const { login, phone } = data;
+
+    const user = await this.usersService.findUser({ login, phone });
 
     return { user };
   }
