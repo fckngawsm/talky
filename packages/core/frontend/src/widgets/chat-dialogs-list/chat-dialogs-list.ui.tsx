@@ -15,7 +15,7 @@ export const ChatDialogsListWidget = ({ dialogs }: ChatDialogsListWidget) => {
   const { onSelectChat } = useChat();
   // Надо переделать так что тут поиск идет по чатам а не по юзерам... чет тупанул
   // Типо мы ищем чаты а не юзеров
-  const { data: foundedUsers, isLoading } = useGetUsersBySearchValue(searchValue);
+  const { data: foundedUsers } = useGetUsersBySearchValue(searchValue);
 
   return (
     <ChatDialogsListWidgetWrapper>
