@@ -13,6 +13,6 @@ export const logError = (error: Error) => {
   H.consumeError(error);
 };
 
-export const identifyUser = (userId: string, userInfo?: Record<string, any>) => {
+export const identifyUser = (userId: string, userInfo?: Record<string, unknown>) => {
   H.identify(userId, userInfo);
 };

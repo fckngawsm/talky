@@ -1,22 +1,28 @@
 import { Flex, Text, TextField } from "@radix-ui/themes";
-import { Controller, type Control } from "react-hook-form";
+import {
+  Controller,
+  type Control,
+  type ControllerRenderProps,
+  type FieldPath,
+  type FieldValues,
+} from "react-hook-form";
 import { StyledRootTextFieldController } from "./input-controller.styled";
 
-interface InputControllerProps {
-  control: Control<any>;
-  name: string;
+interface InputControllerProps<T extends FieldValues> {
+  control: Control<T>;
+  name: FieldPath<T>;
   onChange?: (value: string) => void;
   textFieldProps?: TextField.RootProps;
-  renderInput?: (field: any) => React.ReactNode;
+  renderInput?: (field: ControllerRenderProps<T, FieldPath<T>>) => React.ReactNode;
 }
 
-export const InputController = ({
+export const InputController = <T extends FieldValues>({
   onChange,
   control,
   name,
   textFieldProps,
   renderInput,
-}: InputControllerProps) => {
+}: InputControllerProps<T>) => {
   return (
     <Controller
       name={name}
@@ -26,7 +32,7 @@ export const InputController = ({
           {renderInput ? (
             renderInput({
               ...field,
-              onChange: (e: any) => {
+              onChange: (e) => {
                 field.onChange(e);
                 onChange?.(e?.target?.value || e);
               },

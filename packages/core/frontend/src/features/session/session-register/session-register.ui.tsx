@@ -25,7 +25,9 @@ export const SessionRegister = () => {
       await registerUser(data);
       navigate("/confirm-phone");
       setSearchParams({ phone: data.phone });
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   });
 
   return (
