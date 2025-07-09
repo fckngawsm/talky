@@ -25,10 +25,10 @@ export class AuthService {
       const payload = this.jwtService.verify(
         token,
         process.env.JWT_SECRET as JwtVerifyOptions,
-      ) as any;
+      ) as unknown;
 
       return payload;
-    } catch (e) {
+    } catch {
       return null;
     }
   }

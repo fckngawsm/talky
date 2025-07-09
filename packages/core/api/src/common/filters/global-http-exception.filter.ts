@@ -4,7 +4,7 @@ import { Response } from "express";
 
 @Catch()
 export class GlobalHttpExceptionFilter implements ExceptionFilter {
-  catch(exception: any, host: ArgumentsHost) {
+  catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
 
@@ -18,7 +18,7 @@ export class GlobalHttpExceptionFilter implements ExceptionFilter {
     } else if (exception instanceof HttpException) {
       status = exception.getStatus();
       message = exception.message;
-    } else if (exception?.message) {
+    } else if (exception instanceof Error) {
       message = exception.message;
     }
 
