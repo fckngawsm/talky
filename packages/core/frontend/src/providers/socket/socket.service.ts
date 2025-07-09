@@ -1,5 +1,4 @@
 import { io, Socket } from "socket.io-client";
-// test
 export class SocketService {
   static #instance: SocketService;
   #socket: Socket | null = null;
