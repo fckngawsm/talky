@@ -7,7 +7,7 @@ module.exports = {
       './packages/core/api/tsconfig.json',
       './packages/core/auth-service/tsconfig.json',
       './packages/core/user-service/tsconfig.json',
-      './packages/core/frontend/tsconfig.json',
+      './packages/core/frontend/tsconfig.app.json',
     ],
     tsconfigRootDir: __dirname,
     sourceType: 'module',
