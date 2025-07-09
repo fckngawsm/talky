@@ -39,7 +39,7 @@ export const SessionConfirmPhone = () => {
       await login(phone);
 
       navigate("/chat");
-    } catch (err) {
+    } catch {
       setError("code", { message: "Ошибка при отправки формы" });
     }
   });

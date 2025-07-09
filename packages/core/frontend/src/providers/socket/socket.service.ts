@@ -35,15 +35,15 @@ export class SocketService {
     this.#socket = null;
   }
 
-  on(event: string, handler: (...args: any[]) => void) {
+  on(event: string, handler: (...args: unknown[]) => void) {
     this.#socket?.on(event, handler);
   }
 
-  off(event: string, handler?: (...args: any[]) => void) {
+  off(event: string, handler?: (...args: unknown[]) => void) {
     this.#socket?.off(event, handler);
   }
 
-  emit(event: string, payload: any) {
+  emit(event: string, payload: unknown) {
     this.#socket?.emit(event, payload);
   }
 

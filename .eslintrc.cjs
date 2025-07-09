@@ -22,5 +22,12 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['.eslintrc.js'],
+  rules: {
+    '@typescript-eslint/no-unused-vars': ['error', { 
+      argsIgnorePattern: '^_', 
+      varsIgnorePattern: '^_', 
+      caughtErrorsIgnorePattern: '^_' 
+    }],
+  },
+  ignorePatterns: ['.eslintrc.cjs'],
 };
