@@ -35,7 +35,7 @@ export class AuthController {
   }
 
   @Post("refresh-otp")
-  async refreshOtp(@Body() body: RefreshOtpCodeDTO, @Res({ passthrough: true }) res: Response) {
+  async refreshOtp(@Body() body: RefreshOtpCodeDTO) {
     const { phone } = body;
     await this.authService.refreshOtpCode(phone);
     return { success: true };
