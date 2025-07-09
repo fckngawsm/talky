@@ -1,6 +1,7 @@
 import { registerDecorator, ValidationArguments, ValidationOptions } from "class-validator";
+
 export function IsRussianPhone(validationOptions?: ValidationOptions) {
-  return function (object: Object, propertyName: string) {
+  return function (object: object, propertyName: string) {
     registerDecorator({
       name: "isRussianPhone",
       target: object.constructor,
