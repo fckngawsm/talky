@@ -29,5 +29,5 @@ module.exports = {
       caughtErrorsIgnorePattern: '^_' 
     }],
   },
-  ignorePatterns: ['.eslintrc.cjs'],
+  ignorePatterns: ['.eslintrc.cjs','init.ts'],
 };
