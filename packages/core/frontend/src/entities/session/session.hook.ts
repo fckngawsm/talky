@@ -17,6 +17,7 @@ export const useAuth = () => {
     queryKey: ["currentUser"],
     queryFn: getCurrentUser,
     retry: false,
+    refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
