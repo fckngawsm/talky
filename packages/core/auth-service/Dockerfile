@@ -2,7 +2,7 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-COPY package.json lerna.json yarn.lock ./
+COPY package.json lerna.json yarn.lock tsconfig.base.json tsconfig.json ./
 
 COPY packages/shared/nats-module/package.json ./packages/shared/nats-module/
 COPY packages/core/auth-service/package.json ./packages/core/auth-service/
