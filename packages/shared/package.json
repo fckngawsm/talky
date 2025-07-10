@@ -1,6 +1,7 @@
 {
-  "name": "@talky/nats-module",
+  "name": "@talky/shared-module",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",

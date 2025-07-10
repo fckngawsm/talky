@@ -3,7 +3,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@talky/nats-module": ["../../shared/nats-module/src"]
+      "src/*": ["src/*"],
+      "@talky/nats-module": ["../../shared/src/nats-module"],
+      "@talky/types": ["../../shared/src/types"],
+      "@talky/constants": ["../../shared/src/constants"]
     }
   }
 }

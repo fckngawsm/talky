@@ -14,5 +14,5 @@
     "sourceMap": true, // Генерация source map
     "strictPropertyInitialization": false
   },
-  "include": ["src/**/*"]
+  "include": ["src"]
 }

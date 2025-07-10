@@ -9,7 +9,9 @@
     "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@talky/types": ["../../shared/src/types"],
+      "@talky/constants": ["../../shared/src/constants"]
     },
 
     /* Bundler mode */
