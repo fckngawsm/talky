@@ -9,7 +9,6 @@ COPY packages/core/auth-service/package.json ./packages/core/auth-service/
 
 RUN cd packages/core/auth-service && yarn install --frozen-lockfile
 
-
 COPY packages/shared/nats-module/ ./packages/shared/nats-module/
 COPY packages/core/auth-service/ ./packages/core/auth-service/
 

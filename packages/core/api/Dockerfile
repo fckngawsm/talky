@@ -9,7 +9,6 @@ COPY packages/core/api/package.json ./packages/core/api/
 
 RUN cd packages/core/api && yarn install --frozen-lockfile
 
-
 COPY packages/shared/nats-module/ ./packages/shared/nats-module/
 COPY packages/core/api/ ./packages/core/api/
 
