@@ -2,7 +2,7 @@ import { Text } from "@radix-ui/themes";
 import styled from "styled-components";
 
 export const StyledChatDialogItemWrapper = styled.div<{
-  $isSelected: boolean;
+  $isSelected?: boolean;
 }>`
   padding: 12px;
   border-top: 1px solid rgb(239, 239, 239);
