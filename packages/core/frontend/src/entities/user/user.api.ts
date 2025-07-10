@@ -1,5 +1,5 @@
 import { api } from "@/shared/libs/axios";
-import type { User } from "@/shared/types/User";
+import type { User } from "@talky/types";
 import { useQuery } from "@tanstack/react-query";
 
 export const getUsersBySearchValue = (searchValue: string): Promise<User[] | null> =>

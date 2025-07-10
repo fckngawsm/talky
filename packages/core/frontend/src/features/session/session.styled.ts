@@ -70,6 +70,6 @@ export const StyledSessionDescription = styled(Text)`
   margin-bottom: 20px;
 `;
 
-export const StyledSessionButton = styled(BasedButton)`
+export const StyledSessionBasedButton = styled(BasedButton)`
   height: 50px;
 `;

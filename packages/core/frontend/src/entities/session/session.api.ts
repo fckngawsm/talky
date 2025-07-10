@@ -1,6 +1,5 @@
 import { api } from "@/shared/libs/axios";
-import type { User } from "@/shared/types/User";
-
+import type { User } from "@talky/types";
 type GetCurrentUser = () => Promise<User>;
 type Login = (phone: string) => Promise<void>;
 

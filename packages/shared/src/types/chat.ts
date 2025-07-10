@@ -1,7 +1,7 @@
-import { DialogMemberRole } from "../../constants/dialogMemberRole";
+import { DialogMemberRole } from "../constants";
 import { User } from "./user";
 
-interface Dialog {
+export interface Dialog {
   id: number;
   is_group: string;
   name: string;

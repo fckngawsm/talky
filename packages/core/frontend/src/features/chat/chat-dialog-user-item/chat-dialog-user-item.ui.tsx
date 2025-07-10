@@ -1,7 +1,7 @@
-import type { User } from "@/shared/types/User";
 import { BasedAvatar } from "@/shared/ui/avatar/avatar-based.ui";
 import { EnvelopeClosedIcon } from "@radix-ui/react-icons";
 import { IconButton } from "@radix-ui/themes";
+import type { User } from "@talky/types";
 import {
   StyledChatDialogItemWrapper,
   StyledChatInfoUserNameText,

@@ -1,16 +1,18 @@
+import { User } from "../../types";
+
 // foundedUser
 export class UserGetByPhoneRequestContract {
   phone: string;
 }
 export class UserGetByPhoneResponseContract {
-  user: any;
+  user: User;
 }
 // getOtpCod
 export class UserGetOtpCodeRequestContract {
   userId: number;
 }
 export class UserCreateResponseContract {
-  user: any;
+  user: User;
 }
 //create
 export class UserCreateRequestContract {
@@ -26,5 +28,5 @@ export class UserFindByDataRequestContract {
 }
 
 export class UserFindByDataResponseContract {
-  user: any;
+  user: User;
 }
