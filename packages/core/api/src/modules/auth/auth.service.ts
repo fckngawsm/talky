@@ -22,12 +22,9 @@ export class AuthService {
   ) {}
   async validateToken(token: string) {
     try {
-      const payload = this.jwtService.verify(
-        token,
-        process.env.JWT_SECRET as JwtVerifyOptions,
-      ) as unknown;
+      const { user } = this.jwtService.verify(token, process.env.JWT_SECRET as JwtVerifyOptions);
 
-      return payload;
+      return user.user;
     } catch {
       return null;
     }

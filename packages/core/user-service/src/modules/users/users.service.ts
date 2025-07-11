@@ -32,7 +32,7 @@ export class UsersService {
     const foundedUser = await this.userRepository
       .createQueryBuilder("user")
       .where("user.login LIKE :search", { search: `%${searchValue}%` })
-      .orWhere("user.phone LIKE :search", { search: searchValue })
+      .orWhere("user.phone LIKE :search", { search: `%${searchValue}%` })
       .getMany();
 
     if (!foundedUser) return null;
