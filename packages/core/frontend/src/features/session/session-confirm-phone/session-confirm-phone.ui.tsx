@@ -6,6 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { login } from "@/entities/session/session.api";
+import { userQueryKeys } from "@/shared/query-keys/user";
 import { useQueryClient } from "@tanstack/react-query";
 import { SessionGroupButton } from "../session-group-buttons/session-group-buttons.ui";
 import { SessionRoot } from "../session-root.ui";
@@ -39,7 +40,7 @@ export const SessionConfirmPhone = () => {
     try {
       await confirmOtp({ code: data.code, phone });
       await login(phone);
-      await queryClient.invalidateQueries({ queryKey: ["currentUser"] });
+      await queryClient.invalidateQueries({ queryKey: userQueryKeys.currentUser });
       navigate("/chat");
     } catch {
       setError("code", { message: "Ошибка при отправки формы" });

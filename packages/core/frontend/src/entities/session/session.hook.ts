@@ -1,5 +1,6 @@
 // import { identifyUser } from "@/providers/logger/highlight-run";
 import { useCurrentUser } from "@/providers/store/user.store";
+import { userQueryKeys } from "@/shared/query-keys/user";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +15,7 @@ export const useAuth = () => {
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["currentUser"],
+    queryKey: userQueryKeys.currentUser,
     queryFn: getCurrentUser,
     retry: false,
     refetchOnWindowFocus: false,
