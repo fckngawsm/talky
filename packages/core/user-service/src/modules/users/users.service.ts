@@ -18,6 +18,7 @@ export class UsersService {
   async createUser(phone: string): Promise<User | null> {
     const user = this.userRepository.create({
       phone,
+      avatar: "",
       login: `${Date.now()}-login`,
       lastName: `${Date.now()}-lastName`,
       firstName: `${Date.now()}-firstName`,

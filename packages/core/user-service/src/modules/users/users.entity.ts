@@ -19,6 +19,9 @@ export class User {
   @Column()
   login: string;
 
+  @Column()
+  avatar: string;
+
   @Column({ nullable: true })
   firstName?: string;
 
