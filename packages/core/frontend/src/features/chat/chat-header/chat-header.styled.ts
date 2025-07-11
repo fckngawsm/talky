@@ -5,5 +5,5 @@ export const StyledChatHeader = styled(Box)`
   display: flex;
   flex-direction: column;
   gap: 23px;
-  padding: 21px 10px 14px;
+  padding: 21px 10px 0px;
 `;

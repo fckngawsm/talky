@@ -10,7 +10,7 @@ export const ChatPage = () => {
   return (
     <ChatLayout>
       <ChatContextProvider>
-        <ChatDialogsListWidget dialogs={[]} />
+        <ChatDialogsListWidget />
       </ChatContextProvider>
       {!selectedChatId ? <ChatEmptySelected /> : <ChatNotEmptySelected />}
     </ChatLayout>
