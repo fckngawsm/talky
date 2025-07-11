@@ -11,13 +11,13 @@ import { lastValueFrom } from "rxjs";
 export class UsersService {
   constructor(@Inject("NATS_SERVICE") private readonly natsClient: ClientProxy) {}
   async findUser(data: UserFindByDataRequestContract) {
-    const { user } = await lastValueFrom(
+    const { users } = await lastValueFrom(
       this.natsClient.send<UserFindByDataResponseContract, UserFindByDataRequestContract>(
         USER_PATTERNS.QUERY_GET_USER_BY_DATA,
         { searchValue: data.searchValue },
       ),
     );
 
-    return user;
+    return users;
   }
 }

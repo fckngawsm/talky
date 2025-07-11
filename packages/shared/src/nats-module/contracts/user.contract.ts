@@ -28,5 +28,5 @@ export class UserFindByDataRequestContract {
 }
 
 export class UserFindByDataResponseContract {
-  user: User;
+  users: User[];
 }

@@ -28,13 +28,12 @@ export class UsersService {
     return user;
   }
 
-  async findUser({ searchValue }: UserFindByDataRequestContract): Promise<User | null> {
-    const foundedUser = await this.userRepository.findOne({
-      where: {
-        login: searchValue,
-        phone: searchValue,
-      },
-    });
+  async findUsers({ searchValue }: UserFindByDataRequestContract): Promise<User[] | null> {
+    const foundedUser = await this.userRepository
+      .createQueryBuilder("user")
+      .where("user.login LIKE :search", { search: `%${searchValue}%` })
+      .orWhere("user.phone LIKE :search", { search: searchValue })
+      .getMany();
 
     if (!foundedUser) return null;
 

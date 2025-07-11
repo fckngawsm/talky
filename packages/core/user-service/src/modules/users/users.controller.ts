@@ -43,8 +43,8 @@ export class UsersController {
   ): Promise<UserFindByDataResponseContract> {
     const { searchValue } = data;
 
-    const user = await this.usersService.findUser({ searchValue });
+    const users = await this.usersService.findUsers({ searchValue });
 
-    return { user };
+    return { users };
   }
 }
