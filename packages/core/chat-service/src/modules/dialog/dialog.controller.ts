@@ -4,7 +4,7 @@ import { CHAT_PATTERNS, ChatRequestContract, ChatResponseContract } from "@talky
 import { DialogService } from "./dialog.service";
 
 @Controller()
-export class UsersController {
+export class DialogController {
   constructor(private readonly dialogService: DialogService) {}
 
   @MessagePattern(CHAT_PATTERNS.COMMAND_CHAT_CREATE)
