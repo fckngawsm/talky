@@ -1,6 +1,5 @@
+import { DialogMemberRole } from "@talky/constants";
 import { Column, Entity, PrimaryColumn } from "typeorm";
-import { DialogMemberRole } from "./dialog.constants";
-
 @Entity("dialog_members")
 export class DialogMembers {
   @PrimaryColumn()

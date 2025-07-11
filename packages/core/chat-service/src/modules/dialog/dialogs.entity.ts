@@ -12,7 +12,7 @@ export class Dialog {
   id: number;
 
   @Column()
-  is_group: string;
+  is_group: boolean;
 
   @Column()
   name: string;
