@@ -3,14 +3,14 @@ import { StyledRootTextFieldController } from "@/shared/ui/input-controller/inpu
 import { StyledChatHeader } from "./chat-header.styled";
 
 export const ChatHeader = () => {
-  const { searchValue, onChange } = useSearchChatContext();
+  const { rawSearchValue, onChange } = useSearchChatContext();
 
   return (
     <StyledChatHeader>
       <StyledRootTextFieldController
         size="3"
         onChange={onChange}
-        value={searchValue}
+        value={rawSearchValue}
         placeholder="Поиск"
       />
     </StyledChatHeader>

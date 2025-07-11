@@ -1,3 +1,4 @@
+import { useDebounce } from "@/shared/hooks/useDebounce";
 import {
   createContext,
   useContext,
@@ -8,6 +9,7 @@ import {
 } from "react";
 
 interface ChatContext {
+  rawSearchValue: string;
   searchValue: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -15,12 +17,22 @@ interface ChatContext {
 export const ChatContext = createContext<ChatContext | null>(null);
 
 export const ChatContextProvider = ({ children }: PropsWithChildren) => {
-  const [searchValue, setSearchValue] = useState("");
+  const [rawSearchValue, setRawSearchValue] = useState("");
+
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
+    setRawSearchValue(e.target.value);
   };
 
-  const value = useMemo(() => ({ searchValue, onChange }), [searchValue]);
+  const debouncedValue = useDebounce({ value: rawSearchValue, delay: 400 });
+
+  const value = useMemo(
+    () => ({
+      rawSearchValue,
+      searchValue: debouncedValue,
+      onChange,
+    }),
+    [rawSearchValue, debouncedValue],
+  );
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
 };
