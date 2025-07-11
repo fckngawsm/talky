@@ -63,3 +63,15 @@ export const StyledChatAdditionalUnreadMessageCount = styled(Text)`
   font-weight: 500;
   margin: 0 auto;
 `;
+
+export const StyledDialogUserItemWrapper = styled.div`
+  padding: 12px;
+  border-top: 1px solid rgb(239, 239, 239);
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  background-color: transparent;
+  border-bottom: 1px solid rgb(239 239 239 / 100%);
+`;

@@ -2,7 +2,7 @@ import { ChatTabNames } from "@/entities/chat/chat.constants";
 import { useTabs } from "@/shared/hooks/useTabs";
 import { Tabs } from "@radix-ui/themes";
 import { ChatTab } from "./chat-tab.ui";
-import { StyledChatTabsList, StyledChatTabsTrigger } from "./chat-tabs.styled";
+import { StyledChatTabsList, StyledChatTabsTrigger, StyledTabsContent } from "./chat-tabs.styled";
 import { MembersTab } from "./members-tab.ui";
 
 export const ChatTabs = () => {
@@ -17,12 +17,12 @@ export const ChatTabs = () => {
         <StyledChatTabsTrigger value={ChatTabNames.members}>Контакты</StyledChatTabsTrigger>
       </StyledChatTabsList>
 
-      <Tabs.Content value={ChatTabNames.chat}>
+      <StyledTabsContent value={ChatTabNames.chat}>
         <ChatTab />
-      </Tabs.Content>
-      <Tabs.Content value={ChatTabNames.members}>
+      </StyledTabsContent>
+      <StyledTabsContent value={ChatTabNames.members}>
         <MembersTab />
-      </Tabs.Content>
+      </StyledTabsContent>
     </Tabs.Root>
   );
 };

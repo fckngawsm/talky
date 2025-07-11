@@ -1,11 +1,9 @@
 import { BasedAvatar } from "@/shared/ui/avatar/avatar-based.ui";
-import { EnvelopeClosedIcon } from "@radix-ui/react-icons";
-import { IconButton } from "@radix-ui/themes";
 import type { User } from "@talky/types";
 import {
-  StyledChatDialogItemWrapper,
   StyledChatInfoUserNameText,
   StyledChatInfoWrapper,
+  StyledDialogUserItemWrapper,
 } from "../chat-dialog-item/chat-dialog-item.styled";
 
 interface ChatDialogUserItemProps {
@@ -14,17 +12,12 @@ interface ChatDialogUserItemProps {
 
 export const ChatDialogUserItem = ({ user }: ChatDialogUserItemProps) => {
   return (
-    <StyledChatDialogItemWrapper>
+    <StyledDialogUserItemWrapper>
       <BasedAvatar src={user.avatar} alt="user avatar" />
 
       <StyledChatInfoWrapper>
-        <StyledChatInfoUserNameText as="p">{user.login}</StyledChatInfoUserNameText>
-        <StyledChatInfoUserNameText as="p">{user.phone}</StyledChatInfoUserNameText>
+        <StyledChatInfoUserNameText as="p">{user.login.slice(6)}</StyledChatInfoUserNameText>
       </StyledChatInfoWrapper>
-
-      <IconButton>
-        <EnvelopeClosedIcon />
-      </IconButton>
-    </StyledChatDialogItemWrapper>
+    </StyledDialogUserItemWrapper>
   );
 };

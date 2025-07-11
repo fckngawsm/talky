@@ -28,3 +28,9 @@ export const StyledEmptyTabContent = styled(Text)`
   display: block;
   margin-top: 20px;
 `;
+
+export const StyledTabsContent = styled(Tabs.Content)`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
