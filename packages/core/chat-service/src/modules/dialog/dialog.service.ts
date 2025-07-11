@@ -13,6 +13,21 @@ export class DialogService {
   ) {}
 
   async createDialog({ isGroup, name, memberIds }: ChatRequestContract) {
+    if (!isGroup && memberIds.length === 2) {
+      const existingDialog = await this.dialogRepository
+        .createQueryBuilder("dialogs")
+        .innerJoin("dialogs.members", "member")
+        .where("dialogs.is_group = false")
+        .andWhere("member.user_id IN (:...memberIds)", { memberIds })
+        .groupBy("dialogs.id")
+        .having("COUNT(member.user_id) = 2")
+        .getOne();
+
+      if (existingDialog) {
+        return existingDialog;
+      }
+    }
+
     const createdDialog = await this.dialogRepository.create({
       is_group: isGroup,
       name,
