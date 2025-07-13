@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { NatsTransportModule } from "@talky/nats-module";
-import { ChatModule } from "./modules/chat/chat.module";
+import { ChatModule } from "./modules/chat-gateway/chat.module";
 import { DialogModule } from "./modules/dialog/dialog.module";
 @Module({
   imports: [

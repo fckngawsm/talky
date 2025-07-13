@@ -79,6 +79,7 @@ export class DialogService {
       .createQueryBuilder("d")
       .leftJoinAndSelect("d.messages", "messages", "messages.deleted_at IS NULL")
       .where("d.id = :dialogId", { dialogId })
+      .orderBy("messages.createdAt", "ASC")
       .getOne();
 
     return foundedDialog as unknown as DialogWithMessages;
