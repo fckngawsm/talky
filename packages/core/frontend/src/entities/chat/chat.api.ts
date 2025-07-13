@@ -4,6 +4,7 @@ import type { DialogWithInfo, User } from "@talky/types";
 export interface CreateDialogData {
   isGroup: boolean;
   name: string;
+  avatarUrl: string;
   memberIds: Array<User["id"]>;
 }
 

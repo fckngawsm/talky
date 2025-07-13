@@ -19,6 +19,7 @@ export class DialogController {
       isGroup: data.isGroup,
       name: data.name,
       memberIds: data.memberIds,
+      avatarUrl: data.avatarUrl,
     });
 
     if (!createdDialog) {

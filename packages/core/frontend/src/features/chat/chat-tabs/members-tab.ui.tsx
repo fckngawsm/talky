@@ -11,9 +11,10 @@ export const MembersTab = () => {
   if (!foundedUsers?.length)
     return <StyledEmptyTabContent>Контаков не найдно</StyledEmptyTabContent>;
 
-  const onCreateDialog = async (memberIds: number[], name: string) => {
+  const onCreateDialog = async (memberIds: number[], name: string, avatarUrl: string) => {
     await createDialog({
       isGroup: false,
+      avatarUrl,
       memberIds,
       name,
     });
@@ -25,7 +26,7 @@ export const MembersTab = () => {
         <ChatDialogUserItem
           key={user.id}
           user={user}
-          onCreateDialog={() => onCreateDialog([user.id], user.login)}
+          onCreateDialog={() => onCreateDialog([user.id], user.login, user.avatar)}
         />
       ))}
     </>

@@ -4,8 +4,13 @@ import { ArrayNotEmpty, IsArray, IsBoolean, IsString, ValidateNested } from "cla
 export class ChatDto {
   @IsBoolean()
   isGroup: boolean;
+
+  @IsString()
+  avatarUrl: string;
+
   @IsString()
   name: string;
+
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })

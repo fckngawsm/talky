@@ -3,6 +3,7 @@ import { Dialog, User } from "../../types";
 export class ChatRequestContract {
   isGroup: boolean;
   name: string;
+  avatarUrl: string;
   memberIds: Array<User["id"]>;
 }
 
