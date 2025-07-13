@@ -1,3 +1,4 @@
+import { Messages } from "src/modules/messages/messages.entity";
 import {
   Column,
   CreateDateColumn,
@@ -6,7 +7,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Messages } from "../messages/messages.entity";
 
 @Entity("dialogs")
 export class Dialog {

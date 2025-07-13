@@ -4,8 +4,10 @@ import { DialogMemberRole } from "@talky/constants";
 import { ChatRequestContract } from "@talky/nats-module";
 import { Repository } from "typeorm";
 import { Messages } from "../messages/messages.entity";
-import { DialogMembers } from "./dialog-members.entity";
-import { Dialog } from "./dialogs.entity";
+import { mappingDialogs } from "./dialog.utils";
+import { DialogMembers } from "./entities/dialog-members.entity";
+import { Dialog } from "./entities/dialogs.entity";
+import { ResultDialogs } from "./types/dialogs";
 
 @Injectable()
 export class DialogService {
@@ -51,8 +53,9 @@ export class DialogService {
 
     const ids = dialogIds.map((d) => d.dialog_id);
 
-    const dialogs = await this.dialogRepository
+    const dialogs: ResultDialogs[] = await this.dialogRepository
       .createQueryBuilder("dialog")
+      .whereInIds(ids)
       .innerJoin("dialog_members", "dm", "dm.dialog_id = dialog.id AND dm.user_id = :userId", {
         userId,
       })
@@ -67,6 +70,6 @@ export class DialogService {
       }, "lastMessageContent")
       .getRawMany();
 
-    return dialogs;
+    return mappingDialogs(dialogs);
   }
 }

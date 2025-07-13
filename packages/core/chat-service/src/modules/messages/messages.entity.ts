@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Dialog } from "../dialog/dialogs.entity";
+import { Dialog } from "../dialog/entities/dialogs.entity";
 import { MessageTypes } from "./messages.constants";
 
 @Entity("messages")
