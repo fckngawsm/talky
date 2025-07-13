@@ -3,7 +3,7 @@ import { useChat } from "@/providers/store/chat.store";
 export const MessageItem = ({ content }) => {
   return <li className="message__item">{content}</li>;
 };
-
+// TIDO
 export const MessageList = () => {
   const { selectedChat } = useChat();
   return (
