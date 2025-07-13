@@ -11,6 +11,7 @@ import { StyledRootTextFieldController } from "./input-controller.styled";
 interface InputControllerProps<T extends FieldValues> {
   control: Control<T>;
   name: FieldPath<T>;
+  fullWidth?: boolean;
   onChange?: (value: string) => void;
   textFieldProps?: TextField.RootProps;
   renderInput?: (field: ControllerRenderProps<T, FieldPath<T>>) => React.ReactNode;
@@ -22,13 +23,14 @@ export const InputController = <T extends FieldValues>({
   name,
   textFieldProps,
   renderInput,
+  fullWidth = false,
 }: InputControllerProps<T>) => {
   return (
     <Controller
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <Flex direction="column" gap="1">
+        <Flex direction="column" gap="1" style={{ width: fullWidth ? "100%" : undefined }}>
           {renderInput ? (
             renderInput({
               ...field,
