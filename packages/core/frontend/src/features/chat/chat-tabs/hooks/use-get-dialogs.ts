@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export const useGetDialogs = () => {
   const { currentUser } = useCurrentUser();
-  console.log(currentUser, "curre");
+
   return useQuery({
     queryKey: dialogQueryKeys.dialogsByUserId(currentUser.id),
     queryFn: getDialogs,
