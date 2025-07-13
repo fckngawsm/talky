@@ -7,5 +7,6 @@ export const useGetDialogById = (dialogId: number) => {
     queryKey: dialogQueryKeys.dialogById(dialogId),
     queryFn: () => getDialogById(dialogId),
     enabled: Boolean(dialogId),
+    refetchOnWindowFocus: false,
   });
 };
