@@ -24,7 +24,7 @@ export class AuthService {
     try {
       const { user } = this.jwtService.verify(token, process.env.JWT_SECRET as JwtVerifyOptions);
 
-      return user.user;
+      return user;
     } catch {
       return null;
     }
