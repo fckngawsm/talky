@@ -13,7 +13,7 @@ export const ChatTab = () => {
   return (
     <>
       {dialogs.map((chat) => (
-        <ChatDialogItem key={chat.id} {...chat} onSelectChat={() => onSelectChat(chat.id)} />
+        <ChatDialogItem key={chat.id} dialog={chat} onSelectChat={() => onSelectChat(chat.id)} />
       ))}
     </>
   );

@@ -1,6 +1,6 @@
 import { useChat } from "@/providers/store/chat.store";
 import { BasedAvatar } from "@/shared/ui/avatar/avatar-based.ui";
-import type { Dialog } from "@talky/types";
+import type { DialogWithInfo } from "@talky/types";
 import {
   StyledChatAdditionalInfoTime,
   StyledChatAdditionalInfoWrapper,
@@ -13,29 +13,29 @@ import {
 
 interface ChatDialogItemProps {
   onSelectChat: () => void;
-  dialog: Dialog;
+  dialog: DialogWithInfo;
 }
 
 export const ChatDialogItem = ({ onSelectChat, dialog }: ChatDialogItemProps) => {
   const { selectedChatId } = useChat();
-  const { id, avatarAlt, avatarUrl, name, lastMessage, lastMessageTime, unreadMessageCount } =
-    dialog;
+  const mockedUnreadMessageCount = 0;
+  const { id, avatarUrl, name, lastMessageContent, updatedAt } = dialog;
 
   const isChatSelected = selectedChatId === id;
   return (
     <StyledChatDialogItemWrapper $isSelected={isChatSelected} onClick={onSelectChat}>
-      <BasedAvatar src={avatarUrl} alt={avatarAlt} />
+      <BasedAvatar src={avatarUrl} alt="dialog-avatar" />
 
       <StyledChatInfoWrapper>
         <StyledChatInfoUserNameText as="p">{name}</StyledChatInfoUserNameText>
-        <StyledChatInfoLastMessageText as="p">{lastMessage}</StyledChatInfoLastMessageText>
+        <StyledChatInfoLastMessageText as="p">{lastMessageContent}</StyledChatInfoLastMessageText>
       </StyledChatInfoWrapper>
 
       <StyledChatAdditionalInfoWrapper>
-        <StyledChatAdditionalInfoTime>{lastMessageTime}</StyledChatAdditionalInfoTime>
-        {unreadMessageCount && (
+        <StyledChatAdditionalInfoTime>{updatedAt}</StyledChatAdditionalInfoTime>
+        {mockedUnreadMessageCount > 0 && (
           <StyledChatAdditionalUnreadMessageCount>
-            {unreadMessageCount}
+            {mockedUnreadMessageCount}
           </StyledChatAdditionalUnreadMessageCount>
         )}
       </StyledChatAdditionalInfoWrapper>

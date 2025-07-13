@@ -3,7 +3,7 @@ export interface ResultDialogs {
   dialog_avatarUrl: string;
   dialog_is_group: false;
   dialog_name: string;
-  dialog_createdAt: Date;
-  dialog_updatedAt: Date;
+  dialog_createdAt: string;
+  dialog_updatedAt: string;
   lastMessageContent: string;
 }

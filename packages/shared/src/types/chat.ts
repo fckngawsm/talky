@@ -8,6 +8,16 @@ export interface Dialog {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface DialogWithInfo {
+  id: number;
+  avatarUrl: string;
+  is_group: boolean;
+  updatedAt: string;
+  createdAt: string;
+  lastMessageContent: string;
+  name: string;
+}
 export interface Conversation {
   user: User;
   dialog: Dialog;
