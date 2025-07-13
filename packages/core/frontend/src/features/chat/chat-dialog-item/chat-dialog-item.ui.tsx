@@ -11,8 +11,6 @@ import {
   StyledChatInfoWrapper,
 } from "./chat-dialog-item.styled";
 
-const MOCK = {};
-
 interface ChatDialogItemProps {
   onSelectChat: () => void;
   dialog: Dialog;

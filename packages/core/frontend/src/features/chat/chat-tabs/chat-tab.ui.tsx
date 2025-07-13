@@ -7,7 +7,7 @@ export const ChatTab = () => {
   const { onSelectChat } = useChat();
   const { data: dialogs, isLoading } = useGetDialogs();
   console.log(dialogs, "dialogs");
-  if (!dialogs?.length)
+  if (!dialogs?.length || isLoading)
     return <StyledEmptyTabContent>Создайте ваш первый диалог</StyledEmptyTabContent>;
 
   return (
