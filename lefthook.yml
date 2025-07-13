@@ -1,4 +1,4 @@
 pre-push:
   parallel: true
   jobs:
-    - run: lerna run lint --parallel {staged_files}
+    - run: eslint {staged_files}
