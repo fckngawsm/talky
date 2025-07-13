@@ -50,6 +50,7 @@ export class DialogController {
     @Payload() data: DialogByIdRequestContract,
   ): Promise<DialogByIdResponseContract> {
     const chat = await this.dialogService.getDialogById(data.dialogId);
+
     return { chat };
   }
 }

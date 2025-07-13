@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Post, Query, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Req, UseGuards } from "@nestjs/common";
 import { CookieAuthGuard } from "src/common/guards/cookie-auth.guard";
 import { AuthenticatedRequest } from "src/common/types/authenticated-request";
 import { ChatService } from "./chat.service";
-import { ChatDto, GetChatByIdDto } from "./dto/chat.dto";
+import { ChatDto } from "./dto/chat.dto";
 
 @UseGuards(CookieAuthGuard)
 @Controller("chats")
@@ -26,7 +26,8 @@ export class ChatController {
   }
 
   @Get(":id")
-  getDialogById(@Query() query: GetChatByIdDto) {
-    return this.chatService.getDialogById({ dialogId: query.id });
+  getDialogById(@Param("id") id: string) {
+    console.log("called getDialogById");
+    return this.chatService.getDialogById({ dialogId: Number(id) });
   }
 }

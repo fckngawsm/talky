@@ -1,4 +1,4 @@
-import { useChat } from "@/providers/store/chat.store";
+import { useChatId } from "@/providers/store/chatId.store";
 import { BasedAvatar } from "@/shared/ui/avatar/avatar-based.ui";
 import { formattedDate } from "@/shared/utils/formattedDate";
 import type { DialogWithInfo } from "@talky/types";
@@ -18,7 +18,7 @@ interface ChatDialogItemProps {
 }
 
 export const ChatDialogItem = ({ onSelectChat, dialog }: ChatDialogItemProps) => {
-  const { selectedChatId } = useChat();
+  const { selectedChatId } = useChatId();
   const mockedUnreadMessageCount = 0;
   const { id, avatarUrl, name, lastMessageContent, updatedAt } = dialog;
 

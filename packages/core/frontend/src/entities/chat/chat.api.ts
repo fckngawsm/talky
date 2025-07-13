@@ -13,8 +13,4 @@ export const getDialogs = (): Promise<DialogWithInfo[]> => api.get("/chats");
 export const createDialog = (data: CreateDialogData) => api.post("/chats", data);
 
 export const getDialogById = (dialogId: number): Promise<DialogWithMessages> =>
-  api.get("/chats", {
-    params: {
-      id: dialogId,
-    },
-  });
+  api.get(`/chats/${dialogId}`);

@@ -6,6 +6,7 @@ export interface Dialog {
   id: number;
   is_group: boolean;
   name: string;
+  avatarUrl: string;
   createdAt: Date;
   updatedAt: Date;
 }
