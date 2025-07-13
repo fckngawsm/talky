@@ -1,3 +1,4 @@
+import { createDialog } from "@/entities/chat/chat.api";
 import { useSearchChatContext } from "@/entities/chat/chat.context";
 import { useGetUsersBySearchValue } from "@/entities/user/user.api";
 import { ChatDialogUserItem } from "../chat-dialog-user-item/chat-dialog-user-item.ui";
@@ -10,10 +11,22 @@ export const MembersTab = () => {
   if (!foundedUsers?.length)
     return <StyledEmptyTabContent>Контаков не найдно</StyledEmptyTabContent>;
 
+  const onCreateDialog = async (memberIds: number[], name: string) => {
+    await createDialog({
+      isGroup: false,
+      memberIds,
+      name,
+    });
+  };
+
   return (
     <>
       {foundedUsers.map((user) => (
-        <ChatDialogUserItem key={user.id} user={user} />
+        <ChatDialogUserItem
+          key={user.id}
+          user={user}
+          onCreateDialog={() => onCreateDialog([user.id], user.login)}
+        />
       ))}
     </>
   );

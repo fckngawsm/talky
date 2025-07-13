@@ -8,11 +8,12 @@ import {
 
 interface ChatDialogUserItemProps {
   user: User;
+  onCreateDialog: () => void;
 }
 
-export const ChatDialogUserItem = ({ user }: ChatDialogUserItemProps) => {
+export const ChatDialogUserItem = ({ user, onCreateDialog }: ChatDialogUserItemProps) => {
   return (
-    <StyledDialogUserItemWrapper>
+    <StyledDialogUserItemWrapper onClick={onCreateDialog}>
       <BasedAvatar src={user.avatar} alt="user avatar" />
 
       <StyledChatInfoWrapper>

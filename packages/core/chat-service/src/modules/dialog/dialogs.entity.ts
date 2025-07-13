@@ -12,6 +12,9 @@ export class Dialog {
   id: number;
 
   @Column()
+  avatarUrl: string;
+
+  @Column()
   is_group: boolean;
 
   @Column()

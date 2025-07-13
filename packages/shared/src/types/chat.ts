@@ -3,7 +3,7 @@ import { User } from "./user";
 
 export interface Dialog {
   id: number;
-  is_group: string;
+  is_group: boolean;
   name: string;
   createdAt: Date;
   updatedAt: Date;

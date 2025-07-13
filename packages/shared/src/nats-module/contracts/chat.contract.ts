@@ -1,4 +1,4 @@
-import { User } from "../../types";
+import { Dialog, User } from "../../types";
 
 export class ChatRequestContract {
   isGroup: boolean;
@@ -9,4 +9,12 @@ export class ChatRequestContract {
 export class ChatResponseContract {
   status: string;
   message?: string;
+}
+
+export class DialogsRequestContract {
+  userId: number;
+}
+
+export class DialogsResponseContract {
+  dialogs: Dialog[];
 }

@@ -15,12 +15,13 @@ const MOCK = {};
 
 interface ChatDialogItemProps {
   onSelectChat: () => void;
+  dialog: Dialog;
 }
 
-export const ChatDialogItem = ({ onSelectChat }: ChatDialogItemProps) => {
+export const ChatDialogItem = ({ onSelectChat, dialog }: ChatDialogItemProps) => {
   const { selectedChatId } = useChat();
-  const { id, avatarAlt, avatarUrl, userName, lastMessage, lastMessageTime, unreadMessageCount } =
-    MOCK as Dialog;
+  const { id, avatarAlt, avatarUrl, name, lastMessage, lastMessageTime, unreadMessageCount } =
+    dialog;
 
   const isChatSelected = selectedChatId === id;
   return (
@@ -28,7 +29,7 @@ export const ChatDialogItem = ({ onSelectChat }: ChatDialogItemProps) => {
       <BasedAvatar src={avatarUrl} alt={avatarAlt} />
 
       <StyledChatInfoWrapper>
-        <StyledChatInfoUserNameText as="p">{userName}</StyledChatInfoUserNameText>
+        <StyledChatInfoUserNameText as="p">{name}</StyledChatInfoUserNameText>
         <StyledChatInfoLastMessageText as="p">{lastMessage}</StyledChatInfoLastMessageText>
       </StyledChatInfoWrapper>
 

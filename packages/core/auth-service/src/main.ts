@@ -9,7 +9,6 @@ async function bootstrap() {
       servers: ["nats://nats:4222"],
     },
   });
-  console.log("Auth-service started!");
   await app.listen();
 }
 bootstrap();
