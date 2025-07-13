@@ -1,5 +1,6 @@
 import { useChat } from "@/providers/store/chat.store";
 import { BasedAvatar } from "@/shared/ui/avatar/avatar-based.ui";
+import { formattedDate } from "@/shared/utils/formattedDate";
 import type { DialogWithInfo } from "@talky/types";
 import {
   StyledChatAdditionalInfoTime,
@@ -32,7 +33,7 @@ export const ChatDialogItem = ({ onSelectChat, dialog }: ChatDialogItemProps) =>
       </StyledChatInfoWrapper>
 
       <StyledChatAdditionalInfoWrapper>
-        <StyledChatAdditionalInfoTime>{updatedAt}</StyledChatAdditionalInfoTime>
+        <StyledChatAdditionalInfoTime>{formattedDate(updatedAt)}</StyledChatAdditionalInfoTime>
         {mockedUnreadMessageCount > 0 && (
           <StyledChatAdditionalUnreadMessageCount>
             {mockedUnreadMessageCount}
