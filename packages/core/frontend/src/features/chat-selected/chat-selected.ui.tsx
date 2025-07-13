@@ -14,7 +14,7 @@ export const ChatSelected = () => {
   const { selectedChatId } = useChatId();
   console.log(selectedChatId, "selectedChatId");
   const { data, isLoading } = useGetDialogById(selectedChatId);
-
+  console.log(data, "data");
   if (isLoading) {
     return <ChatSelectedSkeleton />;
   }
