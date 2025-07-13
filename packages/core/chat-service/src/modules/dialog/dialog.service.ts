@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { DialogMemberRole } from "@talky/constants";
 import { ChatRequestContract } from "@talky/nats-module";
 import { Repository } from "typeorm";
+import { Messages } from "../messages/messages.entity";
 import { DialogMembers } from "./dialog-members.entity";
 import { Dialog } from "./dialogs.entity";
 
@@ -18,6 +19,7 @@ export class DialogService {
 
   async createDialog({ isGroup, name, memberIds }: ChatRequestContract) {
     const createdDialog = this.dialogRepository.create({
+      avatarUrl: "",
       is_group: isGroup,
       name,
     });
@@ -49,8 +51,22 @@ export class DialogService {
 
     const ids = dialogIds.map((d) => d.dialog_id);
 
-    // const dialogs = await this.dialogRepository.createQueryBuilder('d').leftJoin('')
+    const dialogs = await this.dialogRepository
+      .createQueryBuilder("dialog")
+      .innerJoin("dialog_members", "dm", "dm.dialog_id = dialog.id AND dm.user_id = :userId", {
+        userId,
+      })
+      .addSelect((subQuery) => {
+        return subQuery
+          .select("m.content")
+          .from(Messages, "m")
+          .where("m.dialog_id = dialog.id")
+          .andWhere("m.deleted_at IS NULL")
+          .orderBy("m.createdAt", "DESC")
+          .limit(1);
+      }, "lastMessageContent")
+      .getRawMany();
 
-    // return dialogs;
+    return dialogs;
   }
 }

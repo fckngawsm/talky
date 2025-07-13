@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -24,10 +25,7 @@ export class Messages {
   @Column({ type: "enum", enum: MessageTypes, default: MessageTypes.text })
   message_type: MessageTypes;
 
-  @Column()
-  edited_at: Date;
-
-  @Column()
+  @DeleteDateColumn()
   deleted_at: Date;
 
   @CreateDateColumn()
