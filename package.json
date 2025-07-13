@@ -17,6 +17,9 @@
     "dev:api": "lerna run dev  --scope=api",
     "dev": "lerna run dev"
   },
+  "lint-staged": {
+    "*.{js,ts,tsx}": "eslint"
+  },
   "name": "talky",
   "version": "1.0.0",
   "main": "index.js",

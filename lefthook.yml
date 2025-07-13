@@ -1,4 +1,4 @@
 pre-commit:
   parallel: true
   jobs:
-    - run: eslint {staged_files}
+    - run: npx lint-staged
