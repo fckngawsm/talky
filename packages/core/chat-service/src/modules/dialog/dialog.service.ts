@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DialogMemberRole } from "@talky/constants";
 import { ChatRequestContract } from "@talky/nats-module";
+import { DialogWithMessages } from "@talky/types";
 import { Repository } from "typeorm";
 import { Messages } from "../messages/messages.entity";
 import { mappingDialogs } from "./dialog.utils";
@@ -71,5 +72,15 @@ export class DialogService {
       .getRawMany();
 
     return mappingDialogs(dialogs);
+  }
+
+  async getDialogById(dialogId: number): Promise<DialogWithMessages> {
+    const foundedDialog = await this.dialogRepository
+      .createQueryBuilder("d")
+      .leftJoinAndSelect("d.messages", "messages", "messages.deleted_at IS NULL")
+      .where("d.id = :dialogId", { dialogId })
+      .getOne();
+
+    return foundedDialog as unknown as DialogWithMessages;
   }
 }

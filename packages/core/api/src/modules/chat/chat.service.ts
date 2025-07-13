@@ -4,6 +4,8 @@ import {
   CHAT_PATTERNS,
   ChatRequestContract,
   ChatResponseContract,
+  DialogByIdRequestContract,
+  DialogByIdResponseContract,
   DialogsRequestContract,
   DialogsResponseContract,
 } from "@talky/nats-module";
@@ -37,5 +39,18 @@ export class ChatService {
     );
 
     return dialogs;
+  }
+
+  async getDialogById({ dialogId }: DialogByIdRequestContract) {
+    const { chat } = await lastValueFrom(
+      this.natsClient.send<DialogByIdResponseContract, DialogByIdRequestContract>(
+        CHAT_PATTERNS.QUERY_DIALOG_BY_ID,
+        {
+          dialogId,
+        },
+      ),
+    );
+
+    return chat;
   }
 }

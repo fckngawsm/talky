@@ -1,4 +1,5 @@
 import { DialogMemberRole } from "../constants";
+import { Message } from "./message";
 import { User } from "./user";
 
 export interface Dialog {
@@ -7,6 +8,10 @@ export interface Dialog {
   name: string;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface DialogWithMessages extends Dialog {
+  messages: Message[];
 }
 
 export interface DialogWithInfo {

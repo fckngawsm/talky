@@ -4,6 +4,8 @@ import {
   CHAT_PATTERNS,
   ChatRequestContract,
   ChatResponseContract,
+  DialogByIdRequestContract,
+  DialogByIdResponseContract,
   DialogsRequestContract,
   DialogsResponseContract,
 } from "@talky/nats-module";
@@ -41,5 +43,13 @@ export class DialogController {
     return {
       dialogs,
     };
+  }
+
+  @MessagePattern(CHAT_PATTERNS.QUERY_DIALOG_BY_ID)
+  async getDialogById(
+    @Payload() data: DialogByIdRequestContract,
+  ): Promise<DialogByIdResponseContract> {
+    const chat = await this.dialogService.getDialogById(data.dialogId);
+    return { chat };
   }
 }

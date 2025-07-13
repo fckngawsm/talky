@@ -14,7 +14,7 @@ export const ChatSelected = () => {
   return (
     <FormProvider {...methods}>
       <StyledSelectedChatWrapper>
-        <ChatSelectedHeader />
+        <ChatSelectedHeader avatarSrc="" />
         <MessageList />
         <Box flexGrow="1" />
         <ChatSelectedForm />

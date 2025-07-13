@@ -1,3 +1,4 @@
+import { MessageTypes } from "@talky/constants";
 import {
   Column,
   CreateDateColumn,
@@ -9,7 +10,6 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { Dialog } from "../dialog/entities/dialogs.entity";
-import { MessageTypes } from "./messages.constants";
 
 @Entity("messages")
 export class Messages {
