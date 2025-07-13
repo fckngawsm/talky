@@ -2,9 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { Dialog } from "../dialog/dialogs.entity";
 import { MessageTypes } from "./messages.constants";
 
 @Entity("messages")
@@ -32,4 +35,8 @@ export class Messages {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ManyToOne(() => Dialog, (dialog) => dialog.messages, { onDelete: "CASCADE" })
+  @JoinColumn({ name: "dialog_id" })
+  dialog: Dialog;
 }

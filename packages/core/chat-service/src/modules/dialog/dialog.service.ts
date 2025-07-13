@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DialogMemberRole } from "@talky/constants";
 import { ChatRequestContract } from "@talky/nats-module";
-import { In, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { DialogMembers } from "./dialog-members.entity";
 import { Dialog } from "./dialogs.entity";
 
@@ -41,21 +41,16 @@ export class DialogService {
   }
 
   async getDialogs(userId: number) {
-    const dialogIds = await this.dialogMembersRepository.find({
-      select: ["dialog_id"],
-      where: {
-        user_id: userId,
-      },
-    });
+    const dialogIds = await this.dialogMembersRepository
+      .createQueryBuilder("dm")
+      .select("DISTINCT dm.dialog_id", "dialog_id")
+      .where("dm.user_id = :userId", { userId })
+      .getRawMany();
 
     const ids = dialogIds.map((d) => d.dialog_id);
 
-    const dialogs = await this.dialogRepository.find({
-      where: {
-        id: In(ids),
-      },
-    });
+    // const dialogs = await this.dialogRepository.createQueryBuilder('d').leftJoin('')
 
-    return dialogs;
+    // return dialogs;
   }
 }

@@ -8,6 +8,7 @@ import {
   DialogsResponseContract,
 } from "@talky/nats-module";
 import { lastValueFrom } from "rxjs";
+import { GetDialogsWithUserInfo } from "./chat.types";
 
 @Injectable()
 export class ChatService {
@@ -28,7 +29,7 @@ export class ChatService {
     return message;
   }
 
-  async getDialogs({ userId }: DialogsRequestContract) {
+  async getDialogs({ userId, phone }: GetDialogsWithUserInfo) {
     const { dialogs } = await lastValueFrom(
       this.natsClient.send<DialogsResponseContract, DialogsRequestContract>(
         CHAT_PATTERNS.QUERY_DIALOGS_GET,

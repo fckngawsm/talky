@@ -2,9 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { Messages } from "../messages/messages.entity";
 
 @Entity("dialogs")
 export class Dialog {
@@ -25,4 +27,7 @@ export class Dialog {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => Messages, (message) => message.dialog)
+  messages: Messages[];
 }
