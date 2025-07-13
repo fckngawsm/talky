@@ -11,13 +11,14 @@ export const StyledChatDialogItemWrapper = styled.div<{
   width: 100%;
   box-sizing: border-box;
   cursor: pointer;
+  align-items: center;
   background-color: ${({ $isSelected }) => ($isSelected ? "rgb(228, 237, 253)" : "transparent")};
 `;
 
 export const StyledChatInfoWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  gap: 15px;
+  flex-direction: column;
+  gap: 5px;
   width: 100%;
 `;
 
