@@ -21,7 +21,7 @@ export class DialogService {
 
   async createDialog({ isGroup, name, memberIds, avatarUrl }: ChatRequestContract) {
     const createdDialog = this.dialogRepository.create({
-      avatarUrl: "",
+      avatarUrl: avatarUrl,
       is_group: isGroup,
       name,
     });
