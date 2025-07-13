@@ -29,7 +29,7 @@ export class ChatService {
     return message;
   }
 
-  async getDialogs({ userId, phone }: GetDialogsWithUserInfo) {
+  async getDialogs({ userId }: GetDialogsWithUserInfo) {
     const { dialogs } = await lastValueFrom(
       this.natsClient.send<DialogsResponseContract, DialogsRequestContract>(
         CHAT_PATTERNS.QUERY_DIALOGS_GET,
