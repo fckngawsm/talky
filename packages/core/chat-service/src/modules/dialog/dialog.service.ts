@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
 import { DialogMemberRole } from "@talky/constants";
 import { ChatRequestContract } from "@talky/nats-module";
 import { Repository } from "typeorm";
@@ -8,7 +9,10 @@ import { Dialog } from "./dialogs.entity";
 @Injectable()
 export class DialogService {
   constructor(
+    @InjectRepository(Dialog)
     private readonly dialogRepository: Repository<Dialog>,
+
+    @InjectRepository(DialogMembers)
     private readonly dialogMembersRepository: Repository<DialogMembers>,
   ) {}
 

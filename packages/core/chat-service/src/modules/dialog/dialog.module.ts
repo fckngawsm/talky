@@ -5,8 +5,8 @@ import { DialogController } from "./dialog.controller";
 import { DialogService } from "./dialog.service";
 import { Dialog } from "./dialogs.entity";
 @Module({
-  controllers: [DialogController],
   imports: [TypeOrmModule.forFeature([Dialog, DialogMembers])],
+  controllers: [DialogController],
   providers: [DialogService],
 })
 export class DialogModule {}
